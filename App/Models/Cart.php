@@ -6,10 +6,6 @@ use App\Models\Orm;
 
 class Cart extends Orm
 {
-    private $id;
-    private $userId;
-    private $items;
-
     public function __construct()
     {
         parent::__construct('carts');
@@ -46,41 +42,26 @@ class Cart extends Orm
         return null;
     }
 
-    /* public function getItemsByCart($cartId)
-    {
-        $items = [];
-        foreach ($_SESSION['cartItems'] as $item) {
-            if ($item['cartId'] == $cartId) {
-                if (isset($items[$item['bookId']])) {
-                    $items[$item['bookId']]['quantity'] += $item['quantity'];
-                } else {
-                    $items[$item['bookId']] = $item;
-                }
-            }
-        }
-        return $items;
-    } */
-
     public function getItemsByCart($cartId)
     {
         $items = [];
         foreach ($_SESSION['cartItems'] as $item) {
             if ($item['cartId'] == $cartId) {
-                $items[] = $item; // Cambiado a añadir cada ítem directamente
+                $items[] = $item;
             }
         }
-        return $items; // Retorna todos los ítems del carrito
+        return $items;
     }
 
 
     public function cleanCart($cartId)
     {
-        // Filtra los ítems del carrito, manteniendo solo aquellos que no pertenecen al carrito que se quiere limpiar
-        $_SESSION['cartItems'] = array_filter($_SESSION['cartItems'], function ($item) use ($cartId) {
-            return $item['cartId'] !== $cartId;
-        });
-
-        // Reindexar el array para que los índices sean continuos (opcional)
-        $_SESSION['cartItems'] = array_values($_SESSION['cartItems']);
+        $updatedCartItems = [];
+        foreach ($_SESSION['cartItems'] as $item) {
+            if ($item['cartId'] != $cartId) {
+                array_push($updatedCartItems, $item);
+            }
+        }
+        $_SESSION['cartItems'] = $updatedCartItems;
     }
 }

@@ -24,15 +24,29 @@ class CartItemController extends Controller
         }
     }
 
-    public function addAnItem() {
-        
+    public function addAnItem($itemId)
+    {
+        $cartItemModel = new CartItem();
+        if ($cartItemModel->addAnItem($itemId)) {
+            header('Location: /cart/shopingCart');
+            exit();
+        }
     }
 
-    public function deleteAnItem() {
-
+    public function deleteAnItem($itemId)
+    {
+        $cartItemModel = new CartItem();
+        if ($cartItemModel->deleteAnItem($itemId)) {
+            header('Location: /cart/shopingCart');
+            exit();
+        }
     }
 
-    public function deleteItem() {
-
+    public function deleteItem($itemId)
+    {
+        $cartItemModel = new CartItem();
+        $cartItemModel->deleteItem($itemId);
+        header('Location: /cart/shopingCart');
+        exit();
     }
 }

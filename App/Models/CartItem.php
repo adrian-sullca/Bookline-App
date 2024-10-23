@@ -48,4 +48,33 @@ class CartItem extends Orm
             return false;
         }
     }
+
+    public function addAnItem($itemId) {
+        foreach ($_SESSION['cartItems'] as &$cartItem) {
+            if ($cartItem['id'] == $itemId) {
+                $cartItem['quantity']++;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function deleteAnItem($itemId) {
+        foreach ($_SESSION['cartItems'] as &$cartItem) {
+            if ($cartItem['id'] == $itemId) {
+                $cartItem['quantity']--;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function deleteItem($itemId) {
+        
+        $cartItems = array_filter($_SESSION['cartItems'], function($item) use($itemId) {
+            return $item['id'] != $itemId;
+        });
+
+        $_SESSION['cartItems'] = $cartItems;
+    }
 }

@@ -6,6 +6,8 @@ use App\Core\Controller;
 use App\Models\CartItem;
 use App\Models\Cart;
 use App\Models\Book;
+use App\Models\Order;
+use App\Models\OrderLines;
 use App\Models\User;
 
 class CartController extends Controller
@@ -80,5 +82,50 @@ class CartController extends Controller
         }
     }
 
-    public function buy($cartId) {}
+    public function buy()
+    {
+        if (!isset($_SESSION['userLogged'])) {
+            header('Location: /user/login');
+            exit();
+        }
+
+        $cartModel = new Cart();
+        $items = $cartModel->getItemsByCart($_SESSION['userLogged']['cartId']);
+
+        if (!empty($items)) {
+            $orderModel = new Order();
+            $newOrder = [
+                "id" => $orderModel->getIdAvailable(),
+                "userId" => $_SESSION['userLogged']['id'],
+                "state" => 'pending'
+            ];
+            array_push($_SESSION['orders'], $newOrder);
+
+            $bookModel = new Book();
+            $newOrderLines = [];
+            foreach ($items as $item) {
+                $newOrderLine = [
+                    "id" => $orderModel->getIdAvailable(),
+                    "orderId" => $newOrder['id'],
+                    "itemId" => $item['bookId'],
+                    "price" => $bookModel->getBookById($item['bookId'])['price'],
+                    "quantity" => $item['quantity'],
+                ];
+                array_push($newOrderLines, $newOrderLine);
+            }
+
+            foreach ($newOrderLines as $line) {
+                array_push($_SESSION['orderLines'], $line);
+            }
+
+            $cartModel->cleanCart($_SESSION['userLogged']['cartId']);
+            $_SESSION['message'] = 'Order placed successfully. Check your orders';
+            header('Location: /cart/shopingCart');
+            exit();
+        } else {
+            $_SESSION['message'] = 'Cart is empty';
+            header('Location: /cart/shopingCart');
+            exit();
+        }
+    }
 }

@@ -28,7 +28,7 @@ foreach ($params['userCartItems'] as $item) {
     </button>
 
     <button>
-        <a href="/cart/clean/<?php echo $user['cartId'] ?>">Delete</a>
+        <a href="/cartItem/deleteItem/<?php echo $item['id'] ?>">Delete item</a>
     </button>
 <?php
     echo '<br>';
@@ -41,7 +41,7 @@ echo '<br>';
 echo '<p>Total Carrito: ' . $totalCart . '</p>';
 ?>
 <button>
-    <a href="/cart/buy/<?php echo $user['cartId'] ?>" class="btn btn-primary">Buy</a>
+    <a href="/cart/buy" class="btn btn-primary">Buy</a>
 </button>
 
 <br>
@@ -51,3 +51,7 @@ echo '<p>Total Carrito: ' . $totalCart . '</p>';
 <button>
     <a href="/cart/clean/<?php echo $user['cartId'] ?>" class="btn btn-primary">Clean</a>
 </button>
+
+<pre>
+    <?php print_r($_SESSION['cartItems'])?>
+</pre>

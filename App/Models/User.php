@@ -6,16 +6,6 @@ use App\Models\Orm;
 
 class User extends Orm
 {
-    private $id;
-    private $username;
-    private $email;
-    private $password;
-    private $address;
-    private $phoneNumber;
-    private $cartId;
-    private $token;
-    private $verified;
-    private $role;
 
     public function __construct()
     {

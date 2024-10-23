@@ -40,6 +40,10 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/book/catalog">Catalog</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/order/orders">My orders</a>
+                        </li>
                     </ul>
                 </div>
             </div>

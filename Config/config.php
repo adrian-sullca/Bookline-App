@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Config;
 
 $users = [
@@ -68,13 +69,13 @@ $cartItems = [
         "id" => 3,
         "cartId" => 2,
         "bookId" => 2,
-        "quantity" => 3, 
+        "quantity" => 3,
     ],
     [
         "id" => 4,
         "cartId" => 2,
         "bookId" => 5,
-        "quantity" => 1, 
+        "quantity" => 1,
     ]
 ];
 
@@ -181,7 +182,54 @@ $books = [
     ]
 ];
 
+$orders = [
+    [
+        "id" => 1,
+        "userId" => 2,
+        "state" => 'pending'
+    ],
+    [
+        "id" => 2,
+        "userId" => 2,
+        "state" => 'pending'
+    ]
+];
+
+$orderLines = [
+    [
+        "id" => 1,
+        "orderId" => 1,
+        "itemId" => 1,
+        "price" => 150,
+        "quantity" => 3,
+    ],
+    [
+        "id" => 2,
+        "orderId" => 1,
+        "itemId" => 2,
+        "price" => 50,
+        "quantity" => 1,
+    ],
+    [
+        "id" => 3,
+        "orderId" => 2,
+        "itemId" => 3,
+        "price" => 50,
+        "quantity" => 2,
+    ],
+    [
+        "id" => 4,
+        "orderId" => 2,
+        "itemId" => 3,
+        "price" => 20,
+        "quantity" => 5,
+    ],
+];
+
+
 if (!isset($_SESSION['users'])) $_SESSION['users'] = $users;
 if (!isset($_SESSION['books'])) $_SESSION['books'] = $books;
 if (!isset($_SESSION['carts'])) $_SESSION['carts'] = $carts;
 if (!isset($_SESSION['cartItems'])) $_SESSION['cartItems'] = $cartItems;
+if (!isset($_SESSION['orders'])) $_SESSION['orders'] = $orders;
+if (!isset($_SESSION['orderLines'])) $_SESSION['orderLines'] = $orderLines;
