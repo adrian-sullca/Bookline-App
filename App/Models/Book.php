@@ -1,14 +1,16 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Orm;
 
-class Book extends Orm{
+class Book extends Orm
+{
     private $id;
     private $isbn;
     private $coverPhoto;
     private $title;
-    private $autor;
+    private $author;
     private $category;
     private $synopsis;
     private $price;
@@ -21,7 +23,8 @@ class Book extends Orm{
         }
     }
 
-    public function getBookById($bookId) {
+    public function getBookById($bookId)
+    {
         foreach ($_SESSION['books'] as $book) {
             if ($book['id'] == $bookId) {
                 return $book;

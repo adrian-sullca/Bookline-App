@@ -20,7 +20,7 @@ class Router
 
         $url_array = explode('/', trim($url_without_query, '/')); 
 
-        $this->controller = !empty($url_array[0]) ? $url_array[0] : 'user';
+        $this->controller = !empty($url_array[0]) ? $url_array[0] : 'auth';
 
         $this->controller = ucfirst(strtolower($this->controller));
         $controllerClass = "App\\Controllers\\" . $this->controller . "Controller";

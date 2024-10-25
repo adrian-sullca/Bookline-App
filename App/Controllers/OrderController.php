@@ -12,7 +12,7 @@ class OrderController extends Controller
     { {
             if (!isset($_SESSION['userLogged'])) {
                 $params['title'] = 'Login';
-                header('Location: /user/login');
+                header('Location: /auth/login');
                 exit();
             } else {
                 $params['title'] = 'My orders';
@@ -27,7 +27,7 @@ class OrderController extends Controller
     {
         if (!isset($_SESSION['userLogged'])) {
             $params['title'] = 'Login';
-            header('Location: /user/login');
+            header('Location: /auth/login');
             exit();
         }
         $orderModel = new Order();
@@ -38,19 +38,40 @@ class OrderController extends Controller
         $this->render('order/orders', $params, 'main');
     }
 
-    public function details($orderId) {
+    public function details($orderId, $message = null)
+    {
         if (!isset($_SESSION['userLogged'])) {
             $params['title'] = 'Login';
-            header('Location: /user/login');
+            header('Location: /auth/login');
             exit();
         }
         $orderModel = new Order();
         $orderLinesModel = new OrderLines();
         $order = $orderModel->getById($orderId);
         $orderLines = $orderLinesModel->getOrderLinesByOrderId($orderId);
+        $params['title'] = 'Order details';
         $params['order'] = $order;
         $params['orderLinesByOrder'] = $orderLines;
         $params['userLogged'] = $_SESSION['userLogged'];
+        if ($message != null) {
+            $params['message'] = $message;
+        }
         $this->render('order/details', $params, 'main');
+    }
+
+    public function cancel($orderId)
+    {
+        if (!isset($_SESSION['userLogged'])) {
+            $params['title'] = 'Login';
+            header('Location: /auth/login');
+            exit();
+        }
+        $orderModel = new Order();
+        $order = $orderModel->getById($orderId);
+        $message = 'Order successfully cancelled';
+        if (!$orderModel->cancelOrder($order)) {
+            $message = 'Error when canceling order';
+        }
+        $this->details($orderId, $message);
     }
 }

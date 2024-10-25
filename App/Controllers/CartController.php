@@ -7,7 +7,6 @@ use App\Models\CartItem;
 use App\Models\Cart;
 use App\Models\Book;
 use App\Models\Order;
-use App\Models\OrderLines;
 use App\Models\User;
 
 class CartController extends Controller
@@ -16,20 +15,20 @@ class CartController extends Controller
     { {
             if (!isset($_SESSION['userLogged'])) {
                 $params['title'] = 'Login';
-                header('Location: /user/login');
+                header('Location: /auth/login');
                 exit();
             } else {
                 $params['title'] = 'My cart';
                 $params['userLogged'] = $_SESSION['userLogged'];
-                $this->render('cart/shopingCart', $params, 'main');
+                $this->render('cart/shoppingCart', $params, 'main');
             }
         }
     }
 
-    public function shopingCart()
+    public function shoppingCart()
     {
         if (!isset($_SESSION['userLogged'])) {
-            header('Location: /user/login');
+            header('Location: /auth/login');
             exit();
         }
 
@@ -43,13 +42,13 @@ class CartController extends Controller
         $cartModel = new Cart();
         $items = $cartModel->getItemsByCart($_SESSION['userLogged']['cartId']);
         $params['userCartItems'] = $items;
-        $this->render('cart/shopingCart', $params, 'main');
+        $this->render('cart/shoppingCart', $params, 'main');
     }
 
     public function addToCart($bookId)
     {
         if (!isset($_SESSION['userLogged'])) {
-            header('Location: /user/login');
+            header('Location: /auth/login');
             exit();
         }
         $userModel = new User();
@@ -57,7 +56,7 @@ class CartController extends Controller
         $cartItemModel = new CartItem();
 
         if ($cartItemModel->addItemToUserCart($bookId, $userLogged)) {
-            header('Location: /cart/shopingCart');
+            header('Location: /cart/shoppingCart');
             exit();
         }
     }
@@ -65,7 +64,7 @@ class CartController extends Controller
     public function clean($cartId)
     {
         if (!isset($_SESSION['userLogged'])) {
-            header('Location: /user/login');
+            header('Location: /auth/login');
             exit();
         }
 
@@ -73,11 +72,11 @@ class CartController extends Controller
             $cartModel = new Cart();
             $cartModel->cleanCart($cartId);
             $_SESSION['message'] = 'Cart cleaned successfully!';
-            header('Location: /cart/shopingCart');
+            header('Location: /cart/shoppingCart');
             exit();
         } else {
             $_SESSION['message'] = 'Error cleaning cart.';
-            header('Location: /cart/shopingCart');
+            header('Location: /cart/shoppingCart');
             exit();
         }
     }
@@ -85,7 +84,7 @@ class CartController extends Controller
     public function buy()
     {
         if (!isset($_SESSION['userLogged'])) {
-            header('Location: /user/login');
+            header('Location: /auth/login');
             exit();
         }
 
@@ -120,11 +119,11 @@ class CartController extends Controller
 
             $cartModel->cleanCart($_SESSION['userLogged']['cartId']);
             $_SESSION['message'] = 'Order placed successfully. Check your orders';
-            header('Location: /cart/shopingCart');
+            header('Location: /cart/shoppingCart');
             exit();
         } else {
             $_SESSION['message'] = 'Cart is empty';
-            header('Location: /cart/shopingCart');
+            header('Location: /cart/shoppingCart');
             exit();
         }
     }

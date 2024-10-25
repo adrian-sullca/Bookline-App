@@ -28,4 +28,14 @@ class Order extends Orm
         });
         return $orders;
     }
+
+    public function cancelOrder($order) {
+        foreach ($_SESSION['orders'] as &$orderArray) {
+            if ($orderArray['id'] == $order['id']) {
+                $orderArray['state'] = 'canceled';
+                return true;
+            }
+        }
+        return false;
+    }
 }

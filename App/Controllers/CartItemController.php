@@ -4,9 +4,6 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\CartItem;
-use App\Models\Cart;
-use App\Models\Book;
-use App\Models\User;
 
 class CartItemController extends Controller
 {
@@ -14,12 +11,12 @@ class CartItemController extends Controller
     { {
             if (!isset($_SESSION['userLogged'])) {
                 $params['title'] = 'Login';
-                header('Location: /user/login');
+                header('Location: /auth/login');
                 exit();
             } else {
                 $params['title'] = 'My cart';
                 $params['userLogged'] = $_SESSION['userLogged'];
-                $this->render('cart/shopingCart', $params, 'main');
+                $this->render('cart/shoppingCart', $params, 'main');
             }
         }
     }
@@ -28,7 +25,7 @@ class CartItemController extends Controller
     {
         $cartItemModel = new CartItem();
         if ($cartItemModel->addAnItem($itemId)) {
-            header('Location: /cart/shopingCart');
+            header('Location: /cart/shoppingCart');
             exit();
         }
     }
@@ -37,7 +34,7 @@ class CartItemController extends Controller
     {
         $cartItemModel = new CartItem();
         if ($cartItemModel->deleteAnItem($itemId)) {
-            header('Location: /cart/shopingCart');
+            header('Location: /cart/shoppingCart');
             exit();
         }
     }
@@ -46,7 +43,7 @@ class CartItemController extends Controller
     {
         $cartItemModel = new CartItem();
         $cartItemModel->deleteItem($itemId);
-        header('Location: /cart/shopingCart');
+        header('Location: /cart/shoppingCart');
         exit();
     }
 }

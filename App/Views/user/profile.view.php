@@ -29,10 +29,15 @@ No se puede actualizar email porque volveria a mandar verificacion al email . IM
 <input type="text" name="email" value="<PHPecho $_SESSION['userLogged']['email']PHP>"> -->
     <p>Password</p>
     <input type="text" name="newPassword" value="<?php echo $_SESSION['userLogged']['password'] ?>">
-    <p>Address</p>
-    <input type="text" name="address" value="<?php echo $_SESSION['userLogged']['address'] ?>">
-    <p>PhoneNumber</p>
-    <input type="text" name="phoneNumber" value="<?php echo $_SESSION['userLogged']['phoneNumber'] ?>">
+    <?php
+    if ($_SESSION['userLogged']['rol'] != 'admin') { ?>
+        <p>Address</p>
+        <input type="text" name="address" value="<?php echo $_SESSION['userLogged']['address'] ?>">
+        <p>PhoneNumber</p>
+        <input type="text" name="phoneNumber" value="<?php echo $_SESSION['userLogged']['phoneNumber'] ?>">
+    <?php
+    }
+    ?>
 
     <p>Imagen</p>
 

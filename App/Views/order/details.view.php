@@ -2,6 +2,9 @@
 use App\Models\Book;
 
 $bookModel = new Book();
+if (isset($params['message'])) {
+    echo '<p>' . $params['message'] . '</p>';
+}
 if (isset($params['order'])): ?>
     <h1>Order Id: <?php echo htmlspecialchars($params['order']['id']); ?></h1>
     <p><strong>State:</strong> <?php echo htmlspecialchars($params['order']['state']); ?></p>
