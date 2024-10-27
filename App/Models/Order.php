@@ -29,10 +29,44 @@ class Order extends Orm
         return $orders;
     }
 
-    public function cancelOrder($order) {
+    public function cancelOrder($order)
+    {
         foreach ($_SESSION['orders'] as &$orderArray) {
             if ($orderArray['id'] == $order['id']) {
-                $orderArray['state'] = 'canceled';
+                $orderArray['state'] = 'Canceled';
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function validateOrder($order)
+    {
+        foreach ($_SESSION['orders'] as &$orderArray) {
+            if ($orderArray['id'] == $order['id']) {
+                $orderArray['state'] = 'Validated';
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getAllOrdersFilter()
+    {
+        $allOrdersNotPending = [];
+        foreach ($_SESSION['orders'] as $order) {
+            if ($order['state'] !== 'Pending' && $order['state'] !== 'Canceled' && $order['state'] !== 'Confirmed by Customer') {
+                array_push($allOrdersNotPending, $order);
+            }
+        }
+        return $allOrdersNotPending;
+    }
+
+    public function changeOrderState($orderId, $newState)
+    {
+        foreach ($_SESSION['orders'] as &$order) {
+            if ($order['id'] == $orderId) {
+                $order['state'] = $newState;
                 return true;
             }
         }

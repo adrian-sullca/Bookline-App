@@ -10,40 +10,9 @@ use App\Helpers\Validator;
 class UserController extends Controller
 {
     public function index($values = null)
-    { {
-            if (!isset($_SESSION['user'])) {
-                $params['title'] = 'Login';
-                $this->render('user/login', $params, 'main');
-            } else {
-                $params['title'] = 'Register';
-                $this->render('user/prueba', $params, 'main');
-            }
-        }
-    }
-
-    public function profile()
     {
-        if (!isset($_SESSION['userLogged'])) {
-            header("Location: /auth/login");
-            exit();
-        }
-
-        if (isset($_SESSION['message'])) {
-            $message = $_SESSION['message'];
-            unset($_SESSION['message']);
-            $params['message'] = $message;
-        }
-
-        if (isset($_SESSION['errors'])) {
-            $errors = $_SESSION['errors'];
-            unset($_SESSION['errors']);
-            $params['errors'] = $errors;
-        }
-
-        $userLogged = $_SESSION['userLogged'];
-        $params['userLogged'] = $userLogged;
-        $params['title'] = 'Profile';
-        $this->render('user/profile', $params, 'main');
+        header('Location: /error/error404');
+        exit();
     }
 
     public function logout()
@@ -68,21 +37,27 @@ class UserController extends Controller
 
             $userModel = new User();
 
-            if ($username !== $userLogged['username']) {
-                if (!$userModel->isFieldAvailable('username', $username)) {
-                    $errors[] = 'Username already exists';
+            if ($username != null) {
+                if ($username !== $userLogged['username']) {
+                    if (!$userModel->isFieldAvailable('username', $username)) {
+                        $errors[] = 'Username already exists';
+                    }
                 }
             }
 
-            if ($newPassword !== $userLogged['password']) {
-                if (!Validator::passwordRegexOk($newPassword)) {
-                    $errors[] = 'Password does not meet complexity requirements';
+            if ($newPassword != null) {
+                if ($newPassword !== $userLogged['password']) {
+                    if (!Validator::passwordRegexOk($newPassword)) {
+                        $errors[] = 'Password does not meet complexity requirements';
+                    }
                 }
             }
 
-            if ($phoneNumber && $phoneNumber !== $userLogged['phoneNumber']) {
-                if (!$userModel->isFieldAvailable('phoneNumber', $phoneNumber)) {
-                    $errors[] = 'Phone number already registered';
+            if ($phoneNumber != null) {
+                if ($phoneNumber && $phoneNumber !== $userLogged['phoneNumber']) {
+                    if (!$userModel->isFieldAvailable('phoneNumber', $phoneNumber)) {
+                        $errors[] = 'Phone number already registered';
+                    }
                 }
             }
 
@@ -156,5 +131,37 @@ class UserController extends Controller
         $carrito = $carritoModel->getCartByUser($user);
         $params['carritoDeUsuario'] = $carrito;
         $this->render('user/prueba', $params, 'main');
+    }
+
+    public function profile()
+    {
+        if ($_SESSION['userLogged']['rol'] != 'client') {
+            header('Location: /auth/login');
+            exit();
+        } else {
+            $params['title'] = 'My profile';
+            $params['cardTitle'] = 'Client Profile';
+            $this->render('user/profile', $params, 'profile');
+        }
+    }
+
+    public function accountSettings()
+    {
+        $params['title'] = 'Account settings';
+        $params['cardTitle'] = 'Account configuration';
+        $this->render('user/accountSettings', $params, 'profile');
+    }
+    public function passwordSettings()
+    {
+        $params['title'] = 'Password settings';
+        $params['cardTitle'] = 'Security configuration';
+        $this->render('user/passwordSettings', $params, 'profile');
+    }
+
+    public function addressSettings()
+    {
+        $params['title'] = 'Password setting';
+        $params['cardTitle'] = 'Address configuration';
+        $this->render('user/addressSettings', $params, 'profile');
     }
 }

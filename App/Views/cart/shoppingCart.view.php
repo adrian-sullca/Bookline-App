@@ -3,8 +3,8 @@
         <div class="row d-flex justify-content-center my-4">
             <div class="col-md-8">
                 <div class="card mb-4">
-                    <div class="card-header py-3">
-                        <h5 class="mb-0">Your shopping cart</h5>
+                    <div class="card-header py-3" style="background-color: black;">
+                        <h2 style="color: white;">Your <strong style="color: #F47F22">shopping cart</strong></h2>
                     </div>
                     <div class="card-body">
                         <?php
@@ -99,8 +99,8 @@
             </div>
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <div class="card-header py-3">
-                        <h5 class="mb-0">Summary</h5>
+                    <div style="background-color: black;" class="card-header py-3">
+                        <h2 style="color:white" class="mb-0">Summary</h2>
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
@@ -133,3 +133,10 @@
         </div>
     </div>
 </section>
+
+<style>
+    h2 {
+        margin: 5px 0 0;
+        font-size: 24px;
+    }
+</style>

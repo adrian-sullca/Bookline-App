@@ -1,12 +1,10 @@
 <br>
-<br>
-
 <div class="container">
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-4">
-                    <h2>Your <strong style="color: #F47F22">orders</strong></h2>
+                    <h2>All <strong style="color: #F47F22">orders</strong></h2>
                 </div>
             </div>
         </div>
@@ -42,13 +40,40 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($params['userOrders'] as $order) { ?>
+                <?php
+
+                use App\Models\User;
+
+                $userModel = new User;
+                foreach ($params['allOrders'] as $order) {
+                    switch ($order['state']) {
+                        case 'Canceled':
+                            $colorClass = 'text-danger'; // Rojo
+                            break;
+                        case 'Pending':
+                            $colorClass = 'text-warning'; // Amarillo
+                            break;
+                        case 'Validated':
+                            $colorClass = 'text-info'; // Azul Claro
+                            break;
+                        case 'In Transit':
+                            $colorClass = 'text-secondary'; // Naranja (opcional, si deseas utilizar un tono diferente)
+                            break;
+                        case 'Delivered to the Customer':
+                            $colorClass = 'text-success'; // Verde
+                            break;
+                        case 'Confirmed by Customer':
+                            $colorClass = 'text-primary'; // Azul Oscuro
+                            break;
+                    }
+                ?>
                     <tr>
+                        <?php $user = $userModel->getById($order['userId']) ?>
                         <td><?php echo htmlspecialchars($order['id']); ?></td>
-                        <td><?php echo $params['userLogged']['username'] ?></td>
-                        <td><?php echo $params['userLogged']['address'] ?></td>
+                        <td><?php echo $user['username'] ?></td>
+                        <td><?php echo $user['address'] ?></td>
                         <td>12</td>
-                        <td><span class="status text-success">&bull;</span> <?php echo htmlspecialchars($order['state']); ?></td>
+                        <td><span class="status <?php echo $colorClass; ?>">&bull;</span> <?php echo htmlspecialchars($order['state']); ?></td>
                         <td>100</td>
                         <td>
                             <a href="/order/details/<?php echo htmlspecialchars($order['id']); ?>" title="View Details" data-toggle="tooltip">
@@ -61,7 +86,7 @@
         </table>
     </div>
 </div>
-
+<br>
 
 <style>
     .table-wrapper {

@@ -5,7 +5,6 @@ use App\Models\Orm;
 
 class CartItem extends Orm
 {
-
     public function __construct()
     {
         parent::__construct('cartItems');
@@ -49,9 +48,13 @@ class CartItem extends Orm
         }
     }
 
-    public function addAnItem($itemId) {
+    public function addAnItem($itemId, $user)
+    {
+        $cartModel = new Cart();
+        $cartUser = $cartModel->getCartByUser($user);
+
         foreach ($_SESSION['cartItems'] as &$cartItem) {
-            if ($cartItem['id'] == $itemId) {
+            if ($cartItem['id'] == $itemId && $cartItem['cartId'] == $cartUser['id']) {
                 $cartItem['quantity']++;
                 return true;
             }
@@ -59,22 +62,30 @@ class CartItem extends Orm
         return false;
     }
 
-    public function deleteAnItem($itemId) {
+    public function deleteAnItem($itemId, $user)
+    {
+        $cartModel = new Cart();
+        $cartUser = $cartModel->getCartByUser($user);
+
         foreach ($_SESSION['cartItems'] as &$cartItem) {
-            if ($cartItem['id'] == $itemId) {
+            if ($cartItem['id'] == $itemId && $cartItem['cartId'] == $cartUser['id']) {
                 $cartItem['quantity']--;
+                if ($cartItem['quantity'] <= 0) {
+                    $this->deleteItem($itemId, $user);
+                }
                 return true;
             }
         }
         return false;
     }
 
-    public function deleteItem($itemId) {
-        
-        $cartItems = array_filter($_SESSION['cartItems'], function($item) use($itemId) {
-            return $item['id'] != $itemId;
-        });
+    public function deleteItem($itemId, $user)
+    {
+        $cartModel = new Cart();
+        $cartUser = $cartModel->getCartByUser($user);
 
-        $_SESSION['cartItems'] = $cartItems;
+        $_SESSION['cartItems'] = array_filter($_SESSION['cartItems'], function($item) use ($itemId, $cartUser) {
+            return $item['id'] != $itemId || $item['cartId'] != $cartUser['id'];
+        });
     }
 }

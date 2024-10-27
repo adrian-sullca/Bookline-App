@@ -18,7 +18,7 @@ class Router
 
         $url_without_query = strtok($_SERVER['REQUEST_URI'], '?');
 
-        $url_array = explode('/', trim($url_without_query, '/')); 
+        $url_array = explode('/', trim($url_without_query, '/'));
 
         $this->controller = !empty($url_array[0]) ? $url_array[0] : 'auth';
 
@@ -28,9 +28,9 @@ class Router
         $controllerPath = __DIR__ . "/controllers/" . $this->controller . "Controller.php";
 
         if (!file_exists($controllerPath)) {
-            $this->controller = "ErrorController"; 
-            $controllerClass = "App\\Controllers\\ErrorController"; 
-            $controllerPath = __DIR__ . "/controllers/ErrorController.php";
+            $this->controller = "Error";
+            $controllerClass = "App\\Controllers\\Error";
+            $controllerPath = "App/Controllers/ErrorController.php";;
         }
 
         require_once($controllerPath);
@@ -51,7 +51,6 @@ class Router
         $c = new $controllerClass();
 
         if (!method_exists($c, $this->method)) {
-            echo "Método no encontrado, usando index";
             $this->method = 'index';
         }
 

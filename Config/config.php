@@ -16,7 +16,7 @@ $users = [
     [
         "id" => 2,
         "username" => "Adrian",
-        "email" => "adrian.sullc@cirvianum.cat",
+        "email" => "adrian.sullca@cirvianum.cat",
         "password" => "123",
         "address" => "Vic",
         "phoneNumber" => "631367253",
@@ -38,7 +38,17 @@ $users = [
         "verified" => true,
         "rol" => "client",
         "imgProfile" => "default_img_profile.webp",
-    ]
+    ],
+    [
+        "id" => 4,
+        "username" => "Delivery",
+        "email" => "delivery@gmail.com",
+        "password" => "123",
+        "token" => "55555",
+        "verified" => true,
+        "rol" => "delivery_person",
+        "imgProfile" => "default_img_profile.webp",
+    ],
 ];
 
 $carts = [
@@ -52,6 +62,21 @@ $carts = [
     ]
 ];
 
+$categories = [
+    "Fantasy",
+    "Classics",
+    "Finance",
+    "Self-Help",
+    "Business",
+    "Historical Fiction",
+    "Science Fiction",
+    "Philosophy",
+    "Fiction",
+    "Horror",
+    "Dystopia",
+    "Young Adult"
+];
+
 $books = [
     [
         "id" => 1,
@@ -59,9 +84,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/Harry Potter and the Sorcerer's Stone.jpg",
         "title" => "Harry Potter and the Sorcerer's Stone",
         "author" => "J.K. Rowling",
-        "category" => "Fantasía",
-        "synopsis" => "Un joven descubre que es un mago y se une a una escuela mágica donde enfrenta grandes desafíos.",
+        "category" => "Fantasy",
+        "synopsis" => "A young boy discovers he is a wizard and joins a magical school where he faces great challenges.",
         "price" => 29.99,
+        "enabled" => true,
     ],
     [
         "id" => 2,
@@ -69,9 +95,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Lord of the Rings The Fellowship of the Ring.jpg",
         "title" => "The Lord of the Rings: The Fellowship of the Ring",
         "author" => "J.R.R. Tolkien",
-        "category" => "Fantasía",
-        "synopsis" => "Un grupo de héroes se embarca en una misión para destruir un anillo que puede dar poder ilimitado.",
+        "category" => "Fantasy",
+        "synopsis" => "A group of heroes embarks on a mission to destroy a ring that can grant unlimited power.",
         "price" => 35.99,
+        "enabled" => true,
     ],
     [
         "id" => 3,
@@ -79,9 +106,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/To Kill a Mockingbird.webp",
         "title" => "To Kill a Mockingbird",
         "author" => "Harper Lee",
-        "category" => "Clásicos",
-        "synopsis" => "Una historia sobre la injusticia racial en el sur de los Estados Unidos a través de los ojos de una niña.",
+        "category" => "Classics",
+        "synopsis" => "A story about racial injustice in the southern United States through the eyes of a young girl.",
         "price" => 24.99,
+        "enabled" => true,
     ],
     [
         "id" => 4,
@@ -89,9 +117,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Great Gatsby.webp",
         "title" => "The Great Gatsby",
         "author" => "F. Scott Fitzgerald",
-        "category" => "Clásicos",
-        "synopsis" => "La historia de un hombre misterioso y su obsesión por una mujer en la alta sociedad de Nueva York.",
+        "category" => "Classics",
+        "synopsis" => "The story of a mysterious man and his obsession with a woman in the high society of New York.",
         "price" => 19.99,
+        "enabled" => true,
     ],
     [
         "id" => 5,
@@ -99,9 +128,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/Rich Dad Poor Dad.jpg",
         "title" => "Rich Dad Poor Dad",
         "author" => "Robert T. Kiyosaki",
-        "category" => "Finanzas",
-        "synopsis" => "Un enfoque diferente sobre cómo las personas pueden mejorar su situación financiera a través de la inversión y la educación financiera.",
+        "category" => "Finance",
+        "synopsis" => "A different approach on how people can improve their financial situation through investment and financial education.",
         "price" => 21.99,
+        "enabled" => true,
     ],
     [
         "id" => 6,
@@ -109,9 +139,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Power of Habit.jpg",
         "title" => "The Power of Habit",
         "author" => "Charles Duhigg",
-        "category" => "Autoayuda",
-        "synopsis" => "Un análisis profundo de cómo los hábitos influyen en nuestras vidas y cómo podemos transformarlos.",
+        "category" => "Self-Help",
+        "synopsis" => "A deep analysis of how habits influence our lives and how we can transform them.",
         "price" => 18.99,
+        "enabled" => true,
     ],
     [
         "id" => 7,
@@ -119,9 +150,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/Good to Great.webp",
         "title" => "Good to Great",
         "author" => "Jim Collins",
-        "category" => "Negocios",
-        "synopsis" => "Un estudio sobre cómo algunas empresas hacen la transición de ser buenas a convertirse en grandes.",
+        "category" => "Business",
+        "synopsis" => "A study on how some companies transition from being good to becoming great.",
         "price" => 23.99,
+        "enabled" => true,
     ],
     [
         "id" => 8,
@@ -129,9 +161,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/Harry Potter and the Chamber of Secrets.jpg",
         "title" => "Harry Potter and the Chamber of Secrets",
         "author" => "J.K. Rowling",
-        "category" => "Fantasía",
-        "synopsis" => "Harry vuelve a Hogwarts para enfrentarse a una nueva amenaza que aterroriza a la escuela.",
+        "category" => "Fantasy",
+        "synopsis" => "Harry returns to Hogwarts to face a new threat that terrorizes the school.",
         "price" => 29.99,
+        "enabled" => true,
     ],
     [
         "id" => 9,
@@ -139,9 +172,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Hobbit.webp",
         "title" => "The Hobbit",
         "author" => "J.R.R. Tolkien",
-        "category" => "Fantasía",
-        "synopsis" => "La historia de Bilbo Bolsón y su aventura en busca del tesoro guardado por el dragón Smaug.",
+        "category" => "Fantasy",
+        "synopsis" => "The story of Bilbo Baggins and his adventure in search of treasure guarded by the dragon Smaug.",
         "price" => 32.99,
+        "enabled" => true,
     ],
     [
         "id" => 10,
@@ -149,9 +183,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Secret.jpg",
         "title" => "The Secret",
         "author" => "Rhonda Byrne",
-        "category" => "Autoayuda",
-        "synopsis" => "Un libro que explora el poder del pensamiento positivo y la ley de la atracción.",
+        "category" => "Self-Help",
+        "synopsis" => "A book that explores the power of positive thinking and the law of attraction.",
         "price" => 16.99,
+        "enabled" => true,
     ],
     [
         "id" => 11,
@@ -159,9 +194,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Alchemist.webp",
         "title" => "The Alchemist",
         "author" => "Paulo Coelho",
-        "category" => "Filosofía",
-        "synopsis" => "La historia de un joven pastor que sigue sus sueños para encontrar un tesoro en Egipto.",
+        "category" => "Philosophy",
+        "synopsis" => "The story of a young shepherd who follows his dreams to find treasure in Egypt.",
         "price" => 25.99,
+        "enabled" => true,
     ],
     [
         "id" => 12,
@@ -169,9 +205,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Road.webp",
         "title" => "The Road",
         "author" => "Cormac McCarthy",
-        "category" => "Ficción",
-        "synopsis" => "Un padre y su hijo luchan por sobrevivir en un mundo post-apocalíptico.",
+        "category" => "Fiction",
+        "synopsis" => "A father and his son struggle to survive in a post-apocalyptic world.",
         "price" => 14.99,
+        "enabled" => true,
     ],
     [
         "id" => 13,
@@ -179,9 +216,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Outsider.jpg",
         "title" => "The Outsider",
         "author" => "Stephen King",
-        "category" => "Terror",
-        "synopsis" => "Un detective investiga un caso que desafía toda lógica y razón.",
+        "category" => "Horror",
+        "synopsis" => "A detective investigates a case that defies all logic and reason.",
         "price" => 22.99,
+        "enabled" => true,
     ],
     [
         "id" => 14,
@@ -189,9 +227,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/Brave New World.webp",
         "title" => "Brave New World",
         "author" => "Aldous Huxley",
-        "category" => "Distopía",
-        "synopsis" => "Un mundo futurista donde el control total sobre la sociedad es el principal objetivo.",
+        "category" => "Dystopia",
+        "synopsis" => "A futuristic world where total control over society is the main goal.",
         "price" => 19.99,
+        "enabled" => true,
     ],
     [
         "id" => 15,
@@ -199,9 +238,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Old Man and the Sea.webp",
         "title" => "The Old Man and the Sea",
         "author" => "Ernest Hemingway",
-        "category" => "Ficción",
-        "synopsis" => "Las luchas de un viejo pescador contra un enorme pez en el mar.",
+        "category" => "Fiction",
+        "synopsis" => "The struggles of an old fisherman against a giant fish in the sea.",
         "price" => 14.99,
+        "enabled" => true,
     ],
     [
         "id" => 16,
@@ -209,9 +249,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/Dune.webp",
         "title" => "Dune",
         "author" => "Frank Herbert",
-        "category" => "Ciencia Ficción",
-        "synopsis" => "La lucha por el control de un planeta desértico y su recurso más valioso, la especia.",
+        "category" => "Science Fiction",
+        "synopsis" => "The struggle for control of a desert planet and its most valuable resource, spice.",
         "price" => 29.99,
+        "enabled" => true,
     ],
     [
         "id" => 17,
@@ -219,19 +260,21 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Catcher in the Rye.jpg",
         "title" => "The Catcher in the Rye",
         "author" => "J.D. Salinger",
-        "category" => "Clásicos",
-        "synopsis" => "La historia de un adolescente rebelde que busca su identidad y lugar en el mundo.",
-        "price" => 18.99,
+        "category" => "Classics",
+        "synopsis" => "The story of a rebellious teenager seeking his identity and place in the world.",
+        "price" => 17.99,
+        "enabled" => true,
     ],
     [
         "id" => 18,
-        "isbn" => "978-0143127550",
-        "coverPhoto" => "../../../Public/Assets/img/books/Gone Girl.webp",
-        "title" => "Gone Girl",
-        "author" => "Gillian Flynn",
-        "category" => "Thriller",
-        "synopsis" => "La desaparición de una mujer revela secretos oscuros sobre su matrimonio.",
+        "isbn" => "978-0061122415",
+        "coverPhoto" => "../../../Public/Assets/img/books/The Book Thief.jpg",
+        "title" => "The Book Thief",
+        "author" => "Markus Zusak",
+        "category" => "Historical Fiction",
+        "synopsis" => "The story of a girl who finds comfort in books during World War II.",
         "price" => 26.99,
+        "enabled" => true,
     ],
     [
         "id" => 19,
@@ -239,9 +282,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/Station Eleven.jpg",
         "title" => "Station Eleven",
         "author" => "Emily St. John Mandel",
-        "category" => "Ciencia Ficción",
-        "synopsis" => "Un grupo de actores sobrevive en un mundo devastado por un virus.",
+        "category" => "Science Fiction",
+        "synopsis" => "A group of actors survives in a world devastated by a virus.",
         "price" => 23.99,
+        "enabled" => true,
     ],
     [
         "id" => 20,
@@ -249,9 +293,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Night Circus.webp",
         "title" => "The Night Circus",
         "author" => "Erin Morgenstern",
-        "category" => "Fantasía",
-        "synopsis" => "Un circo mágico aparece sin previo aviso y es el escenario de un desafío entre dos jóvenes magos.",
+        "category" => "Fantasy",
+        "synopsis" => "A magical circus appears without warning and serves as the stage for a challenge between two young magicians.",
         "price" => 24.99,
+        "enabled" => true,
     ],
     [
         "id" => 21,
@@ -259,9 +304,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Book Thief.jpg",
         "title" => "The Book Thief",
         "author" => "Markus Zusak",
-        "category" => "Histórico",
-        "synopsis" => "La historia de una niña que encuentra consuelo en los libros durante la Segunda Guerra Mundial.",
+        "category" => "Historical Fiction",
+        "synopsis" => "The story of a girl who finds solace in books during World War II.",
         "price" => 19.99,
+        "enabled" => true,
     ],
     [
         "id" => 22,
@@ -269,9 +315,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/Looking for Alaska.webp",
         "title" => "Looking for Alaska",
         "author" => "John Green",
-        "category" => "Joven Adulto",
-        "synopsis" => "Un viaje emocional de amistad y pérdida en un internado.",
+        "category" => "Young Adult",
+        "synopsis" => "An emotional journey of friendship and loss at a boarding school.",
         "price" => 18.99,
+        "enabled" => true,
     ],
     [
         "id" => 23,
@@ -279,9 +326,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/Atonement.jpg",
         "title" => "Atonement",
         "author" => "Ian McEwan",
-        "category" => "Ficción",
-        "synopsis" => "Una historia sobre amor y redención a través del tiempo.",
+        "category" => "Fiction",
+        "synopsis" => "A story about love and redemption across time.",
         "price" => 21.99,
+        "enabled" => true,
     ],
     [
         "id" => 24,
@@ -289,9 +337,10 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Adventures of Huckleberry Finn.jpg",
         "title" => "The Adventures of Huckleberry Finn",
         "author" => "Mark Twain",
-        "category" => "Clásicos",
-        "synopsis" => "Las aventuras de un joven que escapa de su vida en el sur de los Estados Unidos.",
+        "category" => "Classics",
+        "synopsis" => "The adventures of a young boy escaping his life in the southern United States.",
         "price" => 15.99,
+        "enabled" => true,
     ],
     [
         "id" => 25,
@@ -299,12 +348,12 @@ $books = [
         "coverPhoto" => "../../../Public/Assets/img/books/The Picture of Dorian Gray.jpg",
         "title" => "The Picture of Dorian Gray",
         "author" => "Oscar Wilde",
-        "category" => "Clásicos",
-        "synopsis" => "La historia de un joven que desea mantener su belleza eterna a cualquier costo.",
+        "category" => "Classics",
+        "synopsis" => "The story of a young man who wishes to maintain his eternal beauty at any cost.",
         "price" => 16.99,
-    ]
+        "enabled" => true,
+    ],
 ];
-
 
 $cartItems = [
     [
@@ -333,53 +382,215 @@ $cartItems = [
     ]
 ];
 
-
-
 $orders = [
     [
         "id" => 1,
         "userId" => 2,
-        "state" => 'pending'
+        "state" => 'Pending'
     ],
     [
         "id" => 2,
         "userId" => 2,
-        "state" => 'pending'
-    ]
+        "state" => 'Canceled'
+    ],
+    [
+        "id" => 3,
+        "userId" => 3,
+        "state" => 'Validated'
+    ],
+    [
+        "id" => 4,
+        "userId" => 2,
+        "state" => 'In Transit'
+    ],
+    [
+        "id" => 5,
+        "userId" => 3,
+        "state" => 'Delivered to the Customer'
+    ],
+    [
+        "id" => 6,
+        "userId" => 2,
+        "state" => 'Confirmed by Customer'
+    ],
+    [
+        "id" => 7,
+        "userId" => 3,
+        "state" => 'Pending'
+    ],
+    [
+        "id" => 8,
+        "userId" => 2,
+        "state" => 'Validated'
+    ],
+    [
+        "id" => 9,
+        "userId" => 3,
+        "state" => 'In Transit'
+    ],
+    [
+        "id" => 10,
+        "userId" => 2,
+        "state" => 'Canceled'
+    ],
 ];
 
 $orderLines = [
+    // Lines for order 1
     [
         "id" => 1,
         "orderId" => 1,
         "itemId" => 1,
-        "price" => 150,
+        "price" => 29.99,
         "quantity" => 3,
     ],
     [
         "id" => 2,
         "orderId" => 1,
         "itemId" => 2,
-        "price" => 50,
+        "price" => 35.99,
         "quantity" => 1,
     ],
+    // Lines for order 2
     [
         "id" => 3,
         "orderId" => 2,
         "itemId" => 3,
-        "price" => 50,
+        "price" => 24.99,
         "quantity" => 2,
     ],
     [
         "id" => 4,
         "orderId" => 2,
-        "itemId" => 3,
-        "price" => 20,
-        "quantity" => 5,
+        "itemId" => 4,
+        "price" => 19.99,
+        "quantity" => 1,
+    ],
+    // Lines for order 3
+    [
+        "id" => 5,
+        "orderId" => 3,
+        "itemId" => 5,
+        "price" => 21.99,
+        "quantity" => 2,
+    ],
+    [
+        "id" => 6,
+        "orderId" => 3,
+        "itemId" => 6,
+        "price" => 18.99,
+        "quantity" => 1,
+    ],
+    // Lines for order 4
+    [
+        "id" => 7,
+        "orderId" => 4,
+        "itemId" => 7,
+        "price" => 23.99,
+        "quantity" => 2,
+    ],
+    [
+        "id" => 8,
+        "orderId" => 4,
+        "itemId" => 8,
+        "price" => 29.99,
+        "quantity" => 1,
+    ],
+    // Lines for order 5
+    [
+        "id" => 9,
+        "orderId" => 5,
+        "itemId" => 9,
+        "price" => 32.99,
+        "quantity" => 3,
+    ],
+    [
+        "id" => 10,
+        "orderId" => 5,
+        "itemId" => 10,
+        "price" => 16.99,
+        "quantity" => 1,
+    ],
+    // Lines for order 6
+    [
+        "id" => 11,
+        "orderId" => 6,
+        "itemId" => 11,
+        "price" => 25.99,
+        "quantity" => 2,
+    ],
+    [
+        "id" => 12,
+        "orderId" => 6,
+        "itemId" => 12,
+        "price" => 14.99,
+        "quantity" => 1,
+    ],
+    // Lines for order 7
+    [
+        "id" => 13,
+        "orderId" => 7,
+        "itemId" => 13,
+        "price" => 22.99,
+        "quantity" => 4,
+    ],
+    [
+        "id" => 14,
+        "orderId" => 7,
+        "itemId" => 14,
+        "price" => 19.99,
+        "quantity" => 2,
+    ],
+    // Lines for order 8
+    [
+        "id" => 15,
+        "orderId" => 8,
+        "itemId" => 15,
+        "price" => 21.99,
+        "quantity" => 3,
+    ],
+    [
+        "id" => 16,
+        "orderId" => 8,
+        "itemId" => 16,
+        "price" => 24.99,
+        "quantity" => 1,
+    ],
+    // Lines for order 9
+    [
+        "id" => 17,
+        "orderId" => 9,
+        "itemId" => 17,
+        "price" => 29.99,
+        "quantity" => 2,
+    ],
+    [
+        "id" => 18,
+        "orderId" => 9,
+        "itemId" => 18,
+        "price" => 16.99,
+        "quantity" => 1,
+    ],
+    // Lines for order 10
+    [
+        "id" => 19,
+        "orderId" => 10,
+        "itemId" => 19,
+        "price" => 24.99,
+        "quantity" => 3,
+    ],
+    [
+        "id" => 20,
+        "orderId" => 10,
+        "itemId" => 20,
+        "price" => 18.99,
+        "quantity" => 1,
     ],
 ];
 
 
+
+if (!isset($_SESSION['categories'])) $_SESSION['categories'] = $categories;
 if (!isset($_SESSION['users'])) $_SESSION['users'] = $users;
 if (!isset($_SESSION['books'])) $_SESSION['books'] = $books;
 if (!isset($_SESSION['carts'])) $_SESSION['carts'] = $carts;

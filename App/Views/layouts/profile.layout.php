@@ -39,10 +39,13 @@
             color: white;
         }
 
+        /* Estilo por defecto para las imágenes del header */
         .navbar-nav .nav-link img {
             transition: all 0.3s ease;
+            /* Transición suave */
         }
 
+        /* Cambia la imagen en hover */
         .navbar-nav .nav-link img.user-icon:hover {
             content: url('../../../Public/Assets/img/user-icon-orange.svg');
         }
@@ -51,6 +54,7 @@
             content: url('../../../Public/Assets/img/cart-icon-orange.svg');
         }
 
+        /* Personalización del scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -76,81 +80,78 @@
         .btn-floating:hover i {
             color: white;
         }
+
+        .list-group-item-action {
+            color: black;
+            transition: background-color 0.3s ease;
+        }
+
+        .selected {
+            background-color: #F47F22 !important;
+            color: white !important;
+        }
     </style>
 </head>
 
 <body>
     <header style="background-color: black;">
+        <!-- Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
             <div class="container-fluid justify-content-between">
+                <!-- Left elements -->
                 <div class="d-flex">
+                    <!-- Brand -->
                     <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="/book/catalog">
-                        <img src="../../../Public/Assets/img/logoAd.png" height="20" alt="Logo" loading="lazy" style="margin-top: 2px;" />
+                        <img src="../../../Public/Assets/img/logoAd.png" height="20" alt="MDB Logo" loading="lazy"
+                            style="margin-top: 2px;" />
                     </a>
                 </div>
+                <!-- Left elements -->
 
+                <!-- Center elements -->
                 <ul class="navbar-nav flex-row d-none d-md-flex">
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link" href="/book/catalog" style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">CATALOG</a>
+                        <a class="nav-link" href="/book/catalog"
+                            style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">CATALOG</a>
                     </li>
-                    <?php
-                    if (isset($_SESSION['userLogged']) && $_SESSION['userLogged']['rol'] == 'admin') {
-                    ?>
-                        <li class="nav-item me-3 me-lg-1">
-                            <a class="nav-link" href="/admin/bookManagement" style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">MANAGE BOOKS</a>
-                        </li>
-                        <li class="nav-item me-3 me-lg-1">
-                            <a class="nav-link" href="/admin/orderManagement" style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">MANAGE ORDERS</a>
-                        </li>
-                    <?php
-                    }
-                    if (isset($_SESSION['userLogged']) && $_SESSION['userLogged']['rol'] === 'client') {
-                    ?>
-                        <li class="nav-item me-3 me-lg-1">
-                            <a class="nav-link" href="/order/orders" style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">MY ORDERS</a>
-                        </li>
+                    <li class="nav-item me-3 me-lg-1">
+                        <a class="nav-link" href="/order/orders"
+                            style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">MY
+                            ORDERS</a>
+                    </li>
 
-                        <li class="nav-item me-3 me-lg-1">
-                            <a class="nav-link" href="/order/orders" style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">FAVORITES</a>
-                        </li>
-                    <?php
-                    }
-                    if (isset($_SESSION['userLogged']) && $_SESSION['userLogged']['rol'] === 'delivery_person') {
-                    ?>
-                        <li class="nav-item me-3 me-lg-1">
-                            <a class="nav-link" href="/delivery/orders" style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">ORDERS</a>
-                        </li>
-                    <?php
-                    }
-                    ?>
+                    <li class="nav-item me-3 me-lg-1">
+                        <a class="nav-link" href="/order/orders"
+                            style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">
+                            FAVORITES</a>
+                    </li>
                 </ul>
+                <!-- Center elements -->
 
+                <!-- Right elements -->
                 <ul class="navbar-nav flex-row">
-                    <?php
-                    if (isset($_SESSION['userLogged']) && $_SESSION['userLogged']['rol'] == 'client') {
-                    ?>
-                        <li class="nav-item me-3 me-lg-1">
-                            <a class="nav-link d-sm-flex align-items-sm-center" href="/cart/shoppingCart">
-                                <img class="cart-icon" src="../../../Public/Assets/img/cart-icon.svg" height="22" alt="Cart Icon" loading="lazy" />
-                            </a>
-                        </li>
-                    <?php
-                    }
-                    ?>
+                    <!-- Carrito -->
+                    <li class="nav-item me-3 me-lg-1">
+                        <a class="nav-link d-sm-flex align-items-sm-center" href="/cart/shoppingCart">
+                            <img class="cart-icon" src="../../../Public/Assets/img/cart-icon.svg" height="22"
+                                alt="Cart Icon" loading="lazy" />
+                        </a>
+                    </li>
 
+                    <!-- Perfil Dropdown -->
                     <li class="nav-item dropdown me-3 me-lg-1">
+                        <!-- Dropdown menu -->
                         <ul class="navbar-nav flex-row">
                             <?php if (isset($_SESSION['userLogged'])): ?>
                                 <li class="nav-item dropdown me-3 me-lg-1">
                                     <a class="nav-link d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                                         <img class="user-icon rounded-circle" src="../../../Public/Assets/img/user-icon.svg" height="22" alt="User Icon" loading="lazy" />
                                     </a>
+                                    <!-- Dropdown menu -->
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                                        <?php if ($_SESSION['userLogged']['rol'] === 'client'): ?>
-                                            <li>
-                                                <a class="dropdown-item" href="/user/profile">My profile</a>
-                                            </li>
-                                        <?php endif; ?>
+                                        <li>
+                                            <a class="dropdown-item" href="/user/profile">My profile</a>
+                                        </li>
                                         <li>
                                             <a class="dropdown-item" href="/user/logout">Logout</a>
                                         </li>
@@ -165,46 +166,106 @@
                             <?php endif; ?>
                         </ul>
                     </li>
+
                 </ul>
+                <!-- Right elements -->
             </div>
         </nav>
     </header>
 
+
     <main>
-        <?php echo $params['content'] ?>
+        <div class="container p-0">
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-5 col-xl-4">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Profile Settings</h5>
+                        </div>
+
+                        <div class="list-group list-group-flush" role="tablist">
+                            <a class="list-group-item list-group-item-action" href="/user/profile" onclick="selectLink(this)">My profile</a>
+                            <a class="list-group-item list-group-item-action" href="/user/accountSettings" onclick="selectLink(this)">Account</a>
+                            <a class="list-group-item list-group-item-action" href="/user/addressSettings" onclick="selectLink(this)">Address</a>
+                            <a class="list-group-item list-group-item-action" href="/user/passwordSettings" onclick="selectLink(this)">Password</a>
+                            <a class="list-group-item list-group-item-action" href="#" onclick="selectLink(this)">Delete account</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-7 col-xl-8">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="account" role="tabpanel">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0"><?php echo $params['cardTitle'] ?></h5>
+                                </div>
+                                <div class="card-body">
+                                    <?php echo $params['content'] ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <footer class="text-center">
+        <!-- Grid container -->
         <div class="container pt-4">
+            <!-- Section: Social media -->
             <section class="mb-4">
                 <div class="d-flex justify-content-center">
+                    <!-- Facebook -->
                     <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
                         <i class="fab fa-facebook-f"></i>
                     </a>
+                    <!-- Twitter -->
                     <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
                         <i class="fab fa-twitter"></i>
                     </a>
+                    <!-- Google -->
                     <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
                         <i class="fab fa-google"></i>
                     </a>
+                    <!-- Instagram -->
                     <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
                         <i class="fab fa-instagram"></i>
                     </a>
+                    <!-- Linkedin -->
                     <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
                         <i class="fab fa-linkedin"></i>
                     </a>
+                    <!-- Github -->
                     <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
                         <i class="fab fa-github"></i>
                     </a>
                 </div>
             </section>
         </div>
+
+        <!-- Copyright -->
         <div class="text-center p-3" style="color: #e0e0e0;">
             © 2024 Copyright: Adrian Alexander Sullca Aquino
         </div>
     </footer>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <script>
+        function selectLink(link) {
+            // Remove 'selected' class from all items
+            document.querySelectorAll(".list-group-item-action").forEach(item => {
+                item.classList.remove("selected");
+            });
+            // Add 'selected' class only to the clicked item
+            link.classList.add("selected");
+        }
+    </script>
 </body>
 
 </html>

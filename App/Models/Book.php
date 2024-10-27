@@ -32,4 +32,14 @@ class Book extends Orm
         }
         return null;
     }
+
+    public function isFieldAvailable($field, $value)
+    {
+        foreach ($_SESSION['books'] as $book) {
+            if (isset($book[$field]) && $book[$field] == $value && $book['enabled'] == true) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

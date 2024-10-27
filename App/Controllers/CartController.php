@@ -8,10 +8,11 @@ use App\Models\Cart;
 use App\Models\Book;
 use App\Models\Order;
 use App\Models\User;
+use App\Helpers\Mailer;
 
 class CartController extends Controller
 {
-    public function index($values = null)
+    /* public function index($values = null)
     { {
             if (!isset($_SESSION['userLogged'])) {
                 $params['title'] = 'Login';
@@ -23,11 +24,17 @@ class CartController extends Controller
                 $this->render('cart/shoppingCart', $params, 'main');
             }
         }
+    } */
+
+    public function index($values = null)
+    {
+        header('Location: /error/error404');
+        exit();
     }
 
     public function shoppingCart()
     {
-        if (!isset($_SESSION['userLogged'])) {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']['rol'] !== 'client') {
             header('Location: /auth/login');
             exit();
         }
@@ -47,7 +54,7 @@ class CartController extends Controller
 
     public function addToCart($bookId)
     {
-        if (!isset($_SESSION['userLogged'])) {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']['rol'] !== 'client') {
             header('Location: /auth/login');
             exit();
         }
@@ -63,7 +70,7 @@ class CartController extends Controller
 
     public function clean($cartId)
     {
-        if (!isset($_SESSION['userLogged'])) {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']['rol'] !== 'client') {
             header('Location: /auth/login');
             exit();
         }
@@ -83,7 +90,7 @@ class CartController extends Controller
 
     public function buy()
     {
-        if (!isset($_SESSION['userLogged'])) {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']['rol'] !== 'client') {
             header('Location: /auth/login');
             exit();
         }
@@ -96,7 +103,7 @@ class CartController extends Controller
             $newOrder = [
                 "id" => $orderModel->getIdAvailable(),
                 "userId" => $_SESSION['userLogged']['id'],
-                "state" => 'pending'
+                "state" => 'Pending'
             ];
             array_push($_SESSION['orders'], $newOrder);
 
@@ -119,6 +126,11 @@ class CartController extends Controller
 
             $cartModel->cleanCart($_SESSION['userLogged']['cartId']);
             $_SESSION['message'] = 'Order placed successfully. Check your orders';
+            $mailer = new Mailer();
+            $mailer->mailServerSetup();
+            $mailer->addRec($_SESSION['userLogged']);
+            $mailer->addOrderEmailContent($_SESSION['userLogged'], $newOrder, $newOrderLines);
+            $mailer->send();
             header('Location: /cart/shoppingCart');
             exit();
         } else {

@@ -8,7 +8,7 @@ use App\Models\OrderLines;
 
 class OrderController extends Controller
 {
-    public function index($values = null)
+    /* public function index($values = null)
     { {
             if (!isset($_SESSION['userLogged'])) {
                 $params['title'] = 'Login';
@@ -19,17 +19,22 @@ class OrderController extends Controller
                 $this->render('order/orders', $params, 'main');
             }
         }
+    } */
+
+    public function index($values = null)
+    {
+        header('Location: /error/error404');
+        exit();
     }
-
-
 
     public function orders()
     {
-        if (!isset($_SESSION['userLogged'])) {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']['rol'] == 'delivery_person' || $_SESSION['userLogged']['rol'] == 'admin') {
             $params['title'] = 'Login';
             header('Location: /auth/login');
             exit();
         }
+
         $orderModel = new Order();
         $userOrders = $orderModel->getAllOrdersByUserId($_SESSION['userLogged']['id']);
         $params['title'] = 'My orders';
@@ -40,11 +45,12 @@ class OrderController extends Controller
 
     public function details($orderId, $message = null)
     {
-        if (!isset($_SESSION['userLogged'])) {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']['rol'] == 'delivery_person') {
             $params['title'] = 'Login';
             header('Location: /auth/login');
             exit();
         }
+
         $orderModel = new Order();
         $orderLinesModel = new OrderLines();
         $order = $orderModel->getById($orderId);
@@ -61,7 +67,7 @@ class OrderController extends Controller
 
     public function cancel($orderId)
     {
-        if (!isset($_SESSION['userLogged'])) {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']['rol'] == 'delivery_person') {
             $params['title'] = 'Login';
             header('Location: /auth/login');
             exit();
@@ -71,6 +77,22 @@ class OrderController extends Controller
         $message = 'Order successfully cancelled';
         if (!$orderModel->cancelOrder($order)) {
             $message = 'Error when canceling order';
+        }
+        $this->details($orderId, $message);
+    }
+
+    public function validate($orderId)
+    {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']['rol'] == 'delivery_person') {
+            $params['title'] = 'Login';
+            header('Location: /auth/login');
+            exit();
+        }
+        $orderModel = new Order();
+        $order = $orderModel->getById($orderId);
+        $message = 'Order successfully validated';
+        if (!$orderModel->validateOrder($order)) {
+            $message = 'Error when validated order';
         }
         $this->details($orderId, $message);
     }

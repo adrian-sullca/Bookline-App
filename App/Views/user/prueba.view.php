@@ -1,138 +1,211 @@
-<div class="container-fluid">
-
-<div class="container">
-  <!-- Title -->
-  <div class="d-flex justify-content-between align-items-center py-3">
-    <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #16123222</h2>
-  </div>
-
-  <!-- Main content -->
-  <div class="row">
-    <div class="col-lg-8">
-      <!-- Details -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="mb-3 d-flex justify-content-between">
-            <div>
-              <span class="me-3">22-11-2021</span>
-              <span class="me-3">#16123222</span>
-              <span class="me-3">Visa -1234</span>
-              <span class="badge rounded-pill bg-info">SHIPPING</span>
+<div class="container px-1 px-md-4 py-5 mx-auto">
+    <div class="card">
+        <div class="row d-flex justify-content-between px-3 top">
+            <div class="d-flex" style="margin-left: 87px">
+                <h5>ORDER <span class="text-primary font-weight-bold">#Y34XDHR</span></h5>
             </div>
-            <div class="d-flex">
-              <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button>
-              <div class="dropdown">
-                <button class="btn btn-link p-0 text-muted" type="button" data-bs-toggle="dropdown">
-                  <i class="bi bi-three-dots-vertical"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Edit</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i> Print</a></li>
+            <div class="d-flex flex-column text-sm-right" style="margin-left: 87px">
+                <p class="mb-0">Expected Arrival <span>01/12/19</span></p>
+                <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <ul id="progressbar" class="text-center">
+                    <li class="step0 active">
+                        <div class="icon-content">
+                            <div class="icon"><i class="bi bi-file-earmark-check"></i></div>
+                            <p>Order validated</p>
+                        </div>
+                    </li>
+                    <li class="step0 active">
+                        <div class="icon-content">
+                            <div class="icon"><i class="bi bi-truck"></i></div>
+                            <p>In transit</p>
+                        </div>
+                    </li>
+                    <li class="step0">
+                        <div class="icon-content">
+                            <div class="icon"><i class="bi bi-house"></i></div>
+                            <p>Order delivered</p>
+                        </div>
+                    </li>
+                    <li class="step0">
+                        <div class="icon-content">
+                            <div class="icon"><i class="bi bi-check-circle"></i></div>
+                            <p>Order confirmed</p>
+                        </div>
+                    </li>
                 </ul>
-              </div>
             </div>
-          </div>
-          <table class="table table-borderless">
-            <tbody>
-              <tr>
-                <td>
-                  <div class="d-flex mb-2">
-                    <div class="flex-shrink-0">
-                      <img src="https://www.bootdey.com/image/280x280/87CEFA/000000" alt="" width="35" class="img-fluid">
-                    </div>
-                    <div class="flex-lg-grow-1 ms-3">
-                      <h6 class="small mb-0"><a href="#" class="text-reset">Wireless Headphones with Noise Cancellation Tru Bass Bluetooth HiFi</a></h6>
-                      <span class="small">Color: Black</span>
-                    </div>
-                  </div>
-                </td>
-                <td>1</td>
-                <td class="text-end">$79.99</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex mb-2">
-                    <div class="flex-shrink-0">
-                      <img src="https://www.bootdey.com/image/280x280/FF69B4/000000" alt="" width="35" class="img-fluid">
-                    </div>
-                    <div class="flex-lg-grow-1 ms-3">
-                      <h6 class="small mb-0"><a href="#" class="text-reset">Smartwatch IP68 Waterproof GPS and Bluetooth Support</a></h6>
-                      <span class="small">Color: White</span>
-                    </div>
-                  </div>
-                </td>
-                <td>1</td>
-                <td class="text-end">$79.99</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="2">Subtotal</td>
-                <td class="text-end">$159,98</td>
-              </tr>
-              <tr>
-                <td colspan="2">Shipping</td>
-                <td class="text-end">$20.00</td>
-              </tr>
-              <tr>
-                <td colspan="2">Discount (Code: NEWYEAR)</td>
-                <td class="text-danger text-end">-$10.00</td>
-              </tr>
-              <tr class="fw-bold">
-                <td colspan="2">TOTAL</td>
-                <td class="text-end">$169,98</td>
-              </tr>
-            </tfoot>
-          </table>
+            <p> </p>
+            <p> </p>
+            <button class="custom-button">Start delivery (Mark as in transit)</button>
+            <button class="custom-button">Order delivered</button>
         </div>
-      </div>
-      <!-- Payment -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <h3 class="h6">Payment Method</h3>
-              <p>Visa -1234 <br>
-              Total: $169,98 <span class="badge bg-success rounded-pill">PAID</span></p>
-            </div>
-            <div class="col-lg-6">
-              <h3 class="h6">Billing address</h3>
-              <address>
-                <strong>John Doe</strong><br>
-                1355 Market St, Suite 900<br>
-                San Francisco, CA 94103<br>
-                <abbr title="Phone">P:</abbr> (123) 456-7890
-              </address>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="col-lg-4">
-      <!-- Customer Notes -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <h3 class="h6">Customer Notes</h3>
-          <p>Sed enim, faucibus litora velit vestibulum habitasse. Cras lobortis cum sem aliquet mauris rutrum. Sollicitudin. Morbi, sem tellus vestibulum porttitor.</p>
-        </div>
-      </div>
-      <div class="card mb-4">
-        <!-- Shipping information -->
-        <div class="card-body">
-          <h3 class="h6">Shipping Information</h3>
-          <strong>FedEx</strong>
-          <span><a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a> <i class="bi bi-box-arrow-up-right"></i> </span>
-          <hr>
-          <h3 class="h6">Address</h3>
-          <address>
-            <strong>John Doe</strong><br>
-            1355 Market St, Suite 900<br>
-            San Francisco, CA 94103<br>
-            <abbr title="Phone">P:</abbr> (123) 456-7890
-          </address>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
-  </div>
+
+
+<style>
+    .card {
+        /* Establece un ancho máximo para la tarjeta */
+        margin: 0 auto;
+        /* Centra la tarjeta horizontalmente */
+        padding-top: 20px;
+        padding-bottom: 20px;
+        /* Añade un espaciado interno */
+    }
+
+    .row.d-flex.justify-content-center {
+        margin-top: 20px;
+        /* Aumenta el espaciado entre el contenido superior y la línea de progreso */
+    }
+
+    .custom-button {
+        width: 100%;
+        /* Hace que los botones ocupen todo el ancho de la tarjeta */
+        margin: 10px 0;
+        /* Aumenta el margen vertical entre los botones */
+    }
+
+    /* El resto del CSS sigue igual... */
+
+    .custom-button {
+        background-color: #ff8c00;
+        /* Color de fondo naranja */
+        color: white;
+        /* Color del texto */
+        border: none;
+        /* Sin borde */
+        border-radius: 5px;
+        /* Bordes redondeados */
+        padding: 10px 20px;
+        /* Espaciado interno */
+        font-size: 1rem;
+        /* Tamaño de fuente */
+        cursor: pointer;
+        /* Cambiar el cursor a puntero */
+        transition: background-color 0.3s ease;
+        /* Transición suave para el hover */
+        margin: 5px;
+        /* Espaciado entre botones */
+        width: 82%;
+    }
+
+    .custom-button:hover {
+        background-color: #e07b00;
+        /* Color de fondo al pasar el mouse */
+    }
+
+    /* Timeline and progress bar styling */
+    #progressbar {
+        position: relative;
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+
+    /* Background line */
+    #progressbar::before {
+        content: '';
+        position: absolute;
+        top: 25px;
+        /* Aligns with icons */
+        left: 13%;
+        /* Starts the line just after the first icon */
+        right: 13%;
+        /* Ends the line just before the last icon */
+        height: 4px;
+        background-color: #dcdcdc;
+        /* Default background color */
+        z-index: 1;
+    }
+
+    /* Progress line for active steps */
+    #progressbar li.active~li:before {
+        background-color: #dcdcdc;
+        /* Background color for inactive steps */
+    }
+
+    /* Step items */
+    #progressbar li {
+        position: relative;
+        flex: 1;
+        text-align: center;
+        z-index: 2;
+        /* Ensures icons are above the line */
+    }
+
+    /* Completed steps */
+    #progressbar li.active .icon {
+        background-color: #ff8c00;
+        /* Orange for completed steps */
+    }
+
+    /* Active line between completed steps */
+    #progressbar li.active:before {
+        content: '';
+        position: absolute;
+        top: 25px;
+        /* Aligns with icons */
+        left: 80%;
+        /* Starts the line just after the first icon */
+        width: 150px;
+        /* Full width until the next step */
+        height: 4px;
+        background-color: #ff8c00;
+        /* Orange for completed steps */
+        z-index: -1;
+        /* Behind the icons */
+        transform: translateX(-50%);
+        /* Center the line */
+    }
+
+    /* Step icon content */
+    .icon-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+    }
+
+    /* Circle icons */
+    .icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #dcdcdc;
+        /* Default gray background */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #fff;
+        margin-bottom: 10px;
+        z-index: 3;
+    }
+
+    /* Completed icons */
+    #progressbar li.active .icon {
+        background-color: #ff8c00;
+        /* Orange for completed steps */
+    }
+
+    .icon-content p {
+        margin: 0;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+</style>
+
+<!-- Add the required scripts for icons and Bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">

@@ -11,17 +11,22 @@ use Google\Client;
 
 class AuthController extends Controller
 {
-    public function index($values = null)
-    { {
-            if (!isset($_SESSION['userLogged'])) {
-                $params['title'] = 'Login';
-                $this->render('auth/login', $params, 'main');
-            } else {
-                $params['title'] = 'Profile';
-                header('Location: /user/profile');
-                exit();
-            }
+    /* public function index($values = null)
+    {
+        if (!isset($_SESSION['userLogged'])) {
+            $params['title'] = 'Login';
+            $this->render('auth/login', $params, 'main');
+        } else {
+            $params['title'] = 'Profile';
+            header('Location: /user/profile');
+            exit();
         }
+    } */
+
+    public function index($values = null)
+    {
+        header('Location: /error/error404');
+        exit();
     }
 
     public function verified()
@@ -156,7 +161,6 @@ class AuthController extends Controller
 
     public function login()
     {
-        //aqui si el user verificado inicia sesion pues se inizializa el carrito
         if (isset($_SESSION['message'])) {
             $message = $_SESSION['message'];
             unset($_SESSION['message']);
@@ -182,9 +186,15 @@ class AuthController extends Controller
                 if ($user != null) {
                     $_SESSION['userLogged'] = $user;
                     if ($user['rol'] == 'admin') {
-                        header("Location: /admin/profile");
+                        header("Location: /admin/bookManagement");
                         exit();
                     }
+
+                    if ($user['rol'] == 'delivery_person') {
+                        header("Location: /delivery/orders");
+                        exit();
+                    }
+
                     header("Location: /user/profile");
                     exit();
                 }
