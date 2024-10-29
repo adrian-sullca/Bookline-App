@@ -11,8 +11,8 @@ class UserController extends Controller
 {
     public function index($values = null)
     {
-        header('Location: /error/error404');
-        exit();
+        $params['title'] = 'Error';
+        $this->render('error/error404', $params, 'error');
     }
 
     public function logout()

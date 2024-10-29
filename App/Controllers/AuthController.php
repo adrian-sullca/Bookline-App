@@ -11,22 +11,10 @@ use Google\Client;
 
 class AuthController extends Controller
 {
-    /* public function index($values = null)
-    {
-        if (!isset($_SESSION['userLogged'])) {
-            $params['title'] = 'Login';
-            $this->render('auth/login', $params, 'main');
-        } else {
-            $params['title'] = 'Profile';
-            header('Location: /user/profile');
-            exit();
-        }
-    } */
-
     public function index($values = null)
     {
-        header('Location: /error/error404');
-        exit();
+        $params['title'] = 'Login';
+        $this->render('auth/login', $params, 'main');
     }
 
     public function verified()

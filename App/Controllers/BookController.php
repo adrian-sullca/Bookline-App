@@ -9,21 +9,36 @@ use Google\Service\PeopleService\CoverPhoto;
 
 class BookController extends Controller
 {
-    /* public function index($values = null)
-    {
-        $params['title'] = 'Catalog';
-        $this->render('book/catalog', $params, 'main');
-    } */
+
     public function index($values = null)
     {
-        header('Location: /error/error404');
-        exit();
+        $params['title'] = 'Error';
+        $this->render('error/error404', $params, 'error');
     }
+
 
     public function catalog()
     {
+        $bookModel = new Book();
+        $query = isset($_GET['query']) ? trim($_GET['query']) : '';
+        $categories = isset($_GET['category']) ? $_GET['category'] : [];
+
+        if (empty($query) && !$categories) {
+            $books = $bookModel->getAllBooksEnabled();
+        } elseif (!empty($query)) {
+            // Si se ingresa algo en la barra de busqueda
+            $books = $bookModel->searchBooks($query);
+        } elseif ($categories) {
+            // Si se aplica un filtro de category
+            $books = $bookModel->filterBooksByCategories($categories);
+        }
+
+
         $params['title'] = 'Catalog';
-        $this->render('book/catalog', $params, 'main');
+        $params['books'] = $books;
+        $params['selectedCategories'] = $categories;
+        $params['query'] = $query;
+        $this->render('book/card', $params, 'catalog');
     }
 
     public function details($bookId)

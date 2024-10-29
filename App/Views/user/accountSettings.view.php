@@ -6,8 +6,8 @@
                 <input name="username" type="text" class="form-control" id="inputUsername" placeholder="Username">
             </div>
             <div class="form-group">
-                <label name="number" for="inputUsername">Phone number</label>
-                <textarea rows="2" class="form-control" id="inputBio" placeholder="Tell something about yourself"></textarea>
+                <label for="inputUsername">Phone number</label>
+                <input name="number" type="text" class="form-control" id="inputUsername" placeholder="Phone number">
             </div>
         </div>
         <div class="col-md-4">
