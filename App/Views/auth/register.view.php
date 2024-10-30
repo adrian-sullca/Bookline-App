@@ -11,7 +11,13 @@
         </li>
     </ul>
     <!-- Pills navs -->
-
+    <?php 
+    if (isset($params['errors'])) {
+        foreach ($params['errors'] as $error) {
+            echo '<p style="color: red;">' . $error . '</p>';
+        }
+    }
+    ?>
     <!-- Pills content -->
     <div class="tab-content">
         <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">

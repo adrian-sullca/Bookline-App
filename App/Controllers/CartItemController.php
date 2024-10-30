@@ -34,7 +34,6 @@ class CartItemController extends Controller
         }
 
         $cartItemModel = new CartItem();
-
         if ($cartItemModel->addAnItem($itemId, $_SESSION['userLogged'])) {
             header('Location: /cart/shoppingCart');
             exit();

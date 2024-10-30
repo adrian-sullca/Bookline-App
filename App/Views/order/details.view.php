@@ -45,6 +45,11 @@
                                 <span class="badge rounded-pill <?php echo $colorClass; ?>">
                                     <?php echo htmlspecialchars($state); ?>
                                 </span>
+                                <?php
+                                if (isset($params['message'])) {
+                                    echo "<p style='color:#F47F22'>" . $params['message'] . "</p>";
+                                }
+                                ?>
                             </div>
                             <div class="d-flex">
                                 <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text">

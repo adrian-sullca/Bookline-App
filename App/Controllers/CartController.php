@@ -39,10 +39,16 @@ class CartController extends Controller
             exit();
         }
 
+        if (isset($_SESSION['error'])) {
+            $params['error'] = $_SESSION['error'];
+            unset($_SESSION['error']);
+        }
+
         if (isset($_SESSION['message'])) {
             $params['message'] = $_SESSION['message'];
             unset($_SESSION['message']);
         }
+
         $params['title'] = 'My cart';
         $params['userLogged'] = $_SESSION['userLogged'];
 
@@ -62,6 +68,8 @@ class CartController extends Controller
         $userLogged = $userModel->getById($_SESSION['userLogged']['id']);
         $cartItemModel = new CartItem();
 
+        /* $cartReturn = $cartItemModel->addItemToUserCart($bookId, $userLogged);
+        print_r($_SESSION['carts']); */
         if ($cartItemModel->addItemToUserCart($bookId, $userLogged)) {
             header('Location: /cart/shoppingCart');
             exit();
@@ -131,10 +139,11 @@ class CartController extends Controller
             $mailer->addRec($_SESSION['userLogged']);
             $mailer->addOrderEmailContent($_SESSION['userLogged'], $newOrder, $newOrderLines);
             $mailer->send();
+            $_SESSION['message'] = 'Processed order. Check your order in the section "My orders" or by email.';
             header('Location: /cart/shoppingCart');
             exit();
         } else {
-            $_SESSION['message'] = 'Cart is empty';
+            $_SESSION['error'] = 'The order cannot be processed. Your shopping cart is empty';
             header('Location: /cart/shoppingCart');
             exit();
         }

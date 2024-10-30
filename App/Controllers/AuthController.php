@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Helpers\Mailer;
 use App\Helpers\Validator;
 use Google\Client;
+use Google\Service\CloudSearch\Id;
 
 class AuthController extends Controller
 {
@@ -30,10 +31,20 @@ class AuthController extends Controller
             $this->index();
             return;
         }
+        $userModel = new User();
+        $userByUsername = $userModel->getUserByUsername($username);
+        $cartModel = new Cart();
+        $idNewCart = $cartModel->getIdAvailable();
+        $newCart = [
+            'id' => $idNewCart,
+            'userId' => $userByUsername['id'],
+        ];
+        $cartModel->create($newCart);
 
         foreach ($_SESSION['users'] as &$user) {
             if ($user['username'] == $username && $user['token'] == $token) {
                 $user['verified'] = true;
+                $user['cartId'] = $idNewCart;
                 $userModel = new User();
                 $userModel->updateItemById($user);
                 $params['title'] = "Usuario verificado";
@@ -136,7 +147,7 @@ class AuthController extends Controller
                 $mailer->addRec($newUser);
                 $mailer->addVerifyContent($newUser);
                 $mailer->send();
-                $_SESSION['message'] = 'Comprueba tu email';
+                $_SESSION['message'] = 'Verify your account by email';
                 header("Location: /auth/login");
                 exit();
             } else {
@@ -230,6 +241,7 @@ class AuthController extends Controller
             } else {
                 $idNewUser = $userModel->getIdAvailable();
                 $cartModel = new Cart();
+                //Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 $newUser = [
                     'id' => $idNewUser,
                     'username' => $userInfo->name,

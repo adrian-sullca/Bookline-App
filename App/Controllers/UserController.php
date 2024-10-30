@@ -135,7 +135,7 @@ class UserController extends Controller
 
     public function profile()
     {
-        if ($_SESSION['userLogged']['rol'] != 'client') {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']['rol'] != 'client') {
             header('Location: /auth/login');
             exit();
         } else {

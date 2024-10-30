@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Orm;
@@ -25,7 +26,6 @@ class CartItem extends Orm
         $cartUser = $cartModel->getCartByUser($user);
         $bookModel = new Book();
         $book = $bookModel->getBookById($bookId);
-
         if ($book) {
             foreach ($_SESSION['cartItems'] as &$item) {
                 if ($item['cartId'] == $cartUser['id'] && $item['bookId'] == $bookId) {
@@ -33,7 +33,6 @@ class CartItem extends Orm
                     return true;
                 }
             }
-
             $newId = $this->getIdAvailable();
             $cartItem = [
                 "id" => $newId,
@@ -84,7 +83,7 @@ class CartItem extends Orm
         $cartModel = new Cart();
         $cartUser = $cartModel->getCartByUser($user);
 
-        $_SESSION['cartItems'] = array_filter($_SESSION['cartItems'], function($item) use ($itemId, $cartUser) {
+        $_SESSION['cartItems'] = array_filter($_SESSION['cartItems'], function ($item) use ($itemId, $cartUser) {
             return $item['id'] != $itemId || $item['cartId'] != $cartUser['id'];
         });
     }

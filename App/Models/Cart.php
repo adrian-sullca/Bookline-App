@@ -20,7 +20,6 @@ class Cart extends Orm
         $newCart = [
             "id" => $idAvailableCart,
             "userId" => $idUser,
-            "items" => "array de libros"
         ];
         $this->create($newCart);
         return $newCart['id'];

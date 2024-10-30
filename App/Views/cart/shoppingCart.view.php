@@ -4,16 +4,20 @@
             <div class="col-md-8">
                 <div class="card mb-4">
                     <div class="card-header py-3" style="background-color: black;">
-                        <h2 style="color: white;">Your <strong style="color: #F47F22">shopping cart</strong></h2>
+                    <h2 style="color: white;">Your <strong style="color: #F47F22">shopping cart</strong></h2>
                     </div>
                     <div class="card-body">
                         <?php
                         $totalCart = 0;
+                        if (empty($params['userCartItems'])) {
+                            echo '<p style="text-align: center">Your shopping cart is empty</p>';
+                        }
+
                         foreach ($params['userCartItems'] as $item) {
 
                             if ($item['quantity'] <= 0) {
                                 $cartItemModel = new App\Models\CartItem();
-                                $cartItemModel->deleteItem($item['id']);
+                                $cartItemModel->deleteItem($item['id'], $_SESSION['userLogged']);
                                 continue;
                             }
 
@@ -123,10 +127,27 @@
                             </li>
                         </ul>
 
-                        <a href="/cart/buy">
-                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block" style="background-color: #F47F22; color: white;">
-                                Go to checkout
-                            </button></a>
+                        <div style="display: flex; flex-direction:column; gap:15px">
+                            <a href="/cart/buy">
+                                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block" style="background-color: #F47F22; color: white;">
+                                    Procces order
+                                </button>
+                            </a>
+
+                            <a href="/cart/clean/<?php echo $_SESSION['userLogged']['cartId']?>">
+                                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block" style="background-color: #F47F22; color: white;">
+                                    Clean cart
+                                </button>
+                            </a>
+                            <?php
+                            if (isset($params['error'])) {
+                                echo '<p style="color:red; margin:0;margin-top:5px; text-align:center;">' . $params['error'] . '</p>';
+                            }
+                            if (isset($params['message'])) {
+                                echo '<p style="color:#F47F22; margin:0;margin-top:5px; text-align:center;">' . $params['message'] . '</p>';
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>

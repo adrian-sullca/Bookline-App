@@ -39,7 +39,14 @@
                 </div>
 
                 <p class="text-center">or:</p>
-
+                <?php
+                if (isset($params['message'])) {
+                    echo '<p class="text-center" style="color:#F47F22">' . $params['message'] . '</p>';
+                }
+                if (isset($params['error'])) {
+                    echo '<p class="text-center" style="color:red">' . $params['error'] . '</p>';
+                }
+                ?>
                 <!-- Email input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                     <input name="username" type="text" id="form3Example1cg" class="form-control" />
@@ -73,7 +80,7 @@
 
                 <!-- Register buttons -->
                 <div class="text-center">
-                    <p>Don't have an account? <a href="#!" style="color: #F47F22;">Register here</a></p>
+                    <p>Don't have an account? <a href="/auth/register" style="color: #F47F22;">Register here</a></p>
                 </div>
             </form>
         </div>
