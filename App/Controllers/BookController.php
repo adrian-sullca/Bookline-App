@@ -128,7 +128,8 @@ class BookController extends Controller
                 $_SESSION['errors'] = $errors;
             }
 
-            $this->update($bookId);
+            header('Location: /book/update/' . $book['id']);
+            exit();
         }
     }
 }

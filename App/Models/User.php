@@ -72,4 +72,13 @@ class User extends Orm
     {
         return $password === $verifyPassword;
     }
+
+    public function verifyPassword($id, $currentPassword) {
+        foreach ($_SESSION['users'] as $user) {
+            if ($user['id'] == $id && $user['password'] == $currentPassword) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

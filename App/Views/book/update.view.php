@@ -8,25 +8,26 @@
             <div class="row">
                 <div class="col-lg-6 col-md-5 col-sm-6">
                     <div class="white-box text-center">
-                        <img class="card-img-top mb-2 mb-md-0" src="<?php echo htmlspecialchars($params['book']['coverPhoto']); ?>" alt="..." style="max-width: 330px; height: 100%; border-radius: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);" />
+                        <img class="card-img-top mb-2" src="<?php echo htmlspecialchars($params['book']['coverPhoto']); ?>" alt="..." style="max-width: 330px; height: 100%; border-radius: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);" />
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-7 col-sm-6">
-                    <h4 class="box-title mt-5" style="color: #F47F22; font-size:1.5rem; font-weight:bold"><?php echo htmlspecialchars($params['book']['title']); ?></h4>
-                    <p><?php echo htmlspecialchars($params['book']['synopsis']); ?></p>
-                    <h2 class="mt-25" style="color: #F47F22; font-size:1.5rem; font-weight:bold ">
-                        <?php echo htmlspecialchars($params['book']['price']); ?> € <small class="text-success" style="font-size:1.4rem">(Free shipping)</small>
-                    </h2>
-
+                    <br><br>
                     <?php
                     if (isset($params['message'])) {
-                        echo $params['message'];
+                        echo '<p style="color:#F47F22">' . $params['message'] . '<p>';
                     }
 
                     if (isset($params['errors'])) {
                         print_r($params['errors']);
                     }
                     ?>
+                    <div class="small mb-1">ISBN: <?php echo htmlspecialchars($params['book']['isbn']); ?></div>
+                    <h2 class="display-7 fw-bolder"><?php echo htmlspecialchars($params['book']['title']); ?></h2>
+                    <p><?php echo htmlspecialchars($params['book']['synopsis']); ?></p>
+                    <h2 class="mt-25" style="color: black; font-size:1.5rem;">
+                        <?php echo htmlspecialchars($params['book']['price']); ?> € <small class="text-success" style="font-size:1.4rem">(Free shipping)</small>
+                    </h2>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <form action="/book/updateProcess/<?php echo htmlspecialchars($params['book']['id']); ?>" method="post" enctype="multipart/form-data">

@@ -16,7 +16,7 @@ $users = [
     [
         "id" => 2,
         "username" => "Adrian",
-        "email" => "adrian.sullca@cirvianum.cat",
+        "email" => "adrian.sullc@cirvianum.cat",
         "password" => "123",
         "address" => "Vic",
         "phoneNumber" => "631367253",
@@ -386,52 +386,62 @@ $orders = [
     [
         "id" => 1,
         "userId" => 2,
-        "state" => 'Pending'
+        "state" => 'Pending',
+        "orderDate" => '2024-10-01 10:00:00'
     ],
     [
         "id" => 2,
         "userId" => 2,
-        "state" => 'Canceled'
+        "state" => 'Canceled',
+        "orderDate" => '2024-10-02 11:30:00'
     ],
     [
         "id" => 3,
         "userId" => 3,
-        "state" => 'Validated'
+        "state" => 'Validated',
+        "orderDate" => '2024-10-03 12:45:00'
     ],
     [
         "id" => 4,
         "userId" => 2,
-        "state" => 'In Transit'
+        "state" => 'In Transit',
+        "orderDate" => '2024-10-04 14:00:00'
     ],
     [
         "id" => 5,
         "userId" => 3,
-        "state" => 'Delivered to the Customer'
+        "state" => 'Delivered to the Customer',
+        "orderDate" => '2024-10-05 15:15:00'
     ],
     [
         "id" => 6,
         "userId" => 2,
-        "state" => 'Confirmed by Customer'
+        "state" => 'Confirmed by Customer',
+        "orderDate" => '2024-10-06 16:30:00'
     ],
     [
         "id" => 7,
         "userId" => 3,
-        "state" => 'Pending'
+        "state" => 'Pending',
+        "orderDate" => '2024-10-07 17:45:00'
     ],
     [
         "id" => 8,
         "userId" => 2,
-        "state" => 'Validated'
+        "state" => 'Validated',
+        "orderDate" => '2024-10-08 09:00:00'
     ],
     [
         "id" => 9,
         "userId" => 3,
-        "state" => 'In Transit'
+        "state" => 'In Transit',
+        "orderDate" => '2024-10-09 10:15:00'
     ],
     [
         "id" => 10,
         "userId" => 2,
-        "state" => 'Canceled'
+        "state" => 'Canceled',
+        "orderDate" => '2024-10-10 11:30:00'
     ],
 ];
 

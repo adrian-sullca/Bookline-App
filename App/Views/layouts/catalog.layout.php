@@ -125,7 +125,7 @@
         .input-group {
             margin-bottom: 20px;
             /* Espacio entre la barra de búsqueda y las tarjetas */
-            width: 100%;
+            width: 99.5%;
             /* Asegura que la barra de búsqueda ocupe todo el ancho */
         }
 
@@ -168,108 +168,40 @@
             color: white;
             /* Color del texto al pasar el ratón */
         }
+
+        .list-group-item {
+            cursor: pointer; /* Cambia el cursor al pasar por encima para indicar que es clicable */
+            display: flex; /* Utiliza flex para alinear checkbox y texto */
+            align-items: center; /* Centra verticalmente el contenido */
+        }
+
+        .list-group-item input[type="checkbox"] {
+            margin-right: 10px; /* Espacio entre el checkbox y el texto */
+        }
     </style>
 </head>
 
 <body>
-    <header style="background-color: black;">
-        <!-- Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-            <div class="container-fluid justify-content-between">
-                <!-- Left elements -->
-                <div class="d-flex">
-                    <!-- Brand -->
-                    <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="/book/catalog">
-                        <img src="../../../Public/Assets/img/logoAd.png" height="20" alt="MDB Logo" loading="lazy"
-                            style="margin-top: 2px;" />
-                    </a>
-                </div>
-                <!-- Left elements -->
-
-                <!-- Center elements -->
-                <ul class="navbar-nav flex-row d-none d-md-flex">
-                    <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link" href="/book/catalog"
-                            style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">CATALOG</a>
-                    </li>
-                    <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link" href="/order/orders"
-                            style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">MY
-                            ORDERS</a>
-                    </li>
-
-                    <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link" href="/order/orders"
-                            style="color: white; font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 13px; text-align: center;">
-                            FAVORITES</a>
-                    </li>
-                </ul>
-                <!-- Center elements -->
-
-                <!-- Right elements -->
-                <ul class="navbar-nav flex-row">
-                    <!-- Carrito -->
-                    <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link d-sm-flex align-items-sm-center" href="/cart/shoppingCart">
-                            <img class="cart-icon" src="../../../Public/Assets/img/cart-icon.svg" height="22"
-                                alt="Cart Icon" loading="lazy" />
-                        </a>
-                    </li>
-
-                    <!-- Perfil Dropdown -->
-                    <li class="nav-item dropdown me-3 me-lg-1">
-                        <!-- Dropdown menu -->
-                        <ul class="navbar-nav flex-row">
-                            <?php if (isset($_SESSION['userLogged'])): ?>
-                                <li class="nav-item dropdown me-3 me-lg-1">
-                                    <a class="nav-link d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                                        <img class="user-icon rounded-circle" src="../../../Public/Assets/img/user-icon.svg" height="22" alt="User Icon" loading="lazy" />
-                                    </a>
-                                    <!-- Dropdown menu -->
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                                        <li>
-                                            <a class="dropdown-item" href="/user/profile">My profile</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="/user/logout">Logout</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            <?php else: ?>
-                                <li class="nav-item me-3 me-lg-1">
-                                    <a class="nav-link d-flex align-items-center hidden-arrow" href="/auth/login">
-                                        <img class="user-icon rounded-circle" src="../../../Public/Assets/img/user-icon.svg" height="22" alt="User Icon" loading="lazy" />
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-
+    <?php include('header.php') ?>
     <main>
         <br>
         <br>
-        <div style="width: 90%; margin: 0 auto;">
+        <div style="width: 84%; margin: 0 auto;">
             <div class="main-content">
                 <!-- Sidebar lateral -->
                 <div class="sidebar p-3">
-                    <p>filter search</p>
+                    <p style="text-align: center;">filter search</p>
                     <form method="GET" action="/book/catalog">
                         <ul class="list-group">
                             <?php foreach ($_SESSION['categories'] as $category): ?>
-                                <li class="list-group-item">
+                                <li class="list-group-item" onclick="toggleCheckbox(this)">
                                     <input type="checkbox" name="category[]" value="<?php echo $category; ?>"
-                                        <?php echo in_array($category, $params['selectedCategories']) ? 'checked' : ''; ?>><?php echo $category; ?>
+                                        <?php echo in_array($category, $params['selectedCategories']) ? 'checked' : ''; ?>>
+                                    <?php echo $category; ?>
                                 </li>
-
                             <?php endforeach; ?>
                         </ul>
-                        <button type="submit" class="btn btn-custom mt-3" style="width: 100%;">Aplicar Filtros</button>
+                        <button type="submit" class="btn btn-custom mt-3" style="width: 100%;">Apply filters</button>
                     </form>
                 </div>
 
@@ -278,10 +210,10 @@
                     <!-- Barra de búsqueda -->
                     <form method="GET" action="/book/catalog" class="mb-3">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="query" placeholder="Buscar productos..."
+                            <input type="text" class="form-control" name="query" placeholder="Search for books..."
                                 value="<?php echo htmlspecialchars($params['query'] ? $params['query'] : "") ?>" aria-label="Buscar productos">
                             <div class="input-group-append">
-                                <button class="btn btn-custom" type="submit">Buscar</button>
+                                <button class="btn btn-custom" type="submit">Search</button>
                             </div>
                         </div>
                     </form>
@@ -295,47 +227,14 @@
         <br>
         <br>
     </main>
-
-    <footer class="text-center">
-        <!-- Grid container -->
-        <div class="container pt-4">
-            <!-- Section: Social media -->
-            <section class="mb-4">
-                <div class="d-flex justify-content-center">
-                    <!-- Facebook -->
-                    <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <!-- Twitter -->
-                    <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <!-- Google -->
-                    <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
-                        <i class="fab fa-google"></i>
-                    </a>
-                    <!-- Instagram -->
-                    <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <!-- Linkedin -->
-                    <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <!-- Github -->
-                    <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#!" role="button">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-            </section>
-        </div>
-
-        <!-- Copyright -->
-        <div class="text-center p-3" style="color: #e0e0e0;">
-            © 2024 Copyright: Adrian Alexander Sullca Aquino
-        </div>
-    </footer>
+    <?php include('footer.php') ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <script>
+        function toggleCheckbox(listItem) {
+            const checkbox = listItem.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+        }
+    </script>
 </body>
 
 </html>

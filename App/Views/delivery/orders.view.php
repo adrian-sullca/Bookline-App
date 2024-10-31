@@ -37,7 +37,6 @@
                     <th>Address</th>
                     <th>Order Date</th>
                     <th>Status</th>
-                    <th>Total</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -74,9 +73,8 @@
                         <td><?php echo htmlspecialchars($order['id']); ?></td>
                         <td><?php echo $user['username'] ?></td>
                         <td><?php echo $user['address'] ?></td>
-                        <td>12</td>
+                        <td><?php echo $order['orderDate'] ?></td>
                         <td><span class="status <?php echo $colorClass; ?>">&bull;</span> <?php echo htmlspecialchars($order['state']); ?></td>
-                        <td>100</td>
                         <td>
                             <!-- Button trigger modal -->
                             <button data-toggle="modal" data-target="#modalOrder<?php echo $order['id']; ?>" style="border: none; background: none;">

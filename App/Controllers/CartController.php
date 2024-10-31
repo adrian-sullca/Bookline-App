@@ -111,7 +111,8 @@ class CartController extends Controller
             $newOrder = [
                 "id" => $orderModel->getIdAvailable(),
                 "userId" => $_SESSION['userLogged']['id'],
-                "state" => 'Pending'
+                "state" => 'Pending',
+                "orderDate" => date("Y-m-d H:i:s")
             ];
             array_push($_SESSION['orders'], $newOrder);
 

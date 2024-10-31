@@ -50,8 +50,19 @@ class OrderController extends Controller
             header('Location: /auth/login');
             exit();
         }
-
         $orderModel = new Order();
+        if ($_SESSION['userLogged']['rol'] == 'client' || $_SESSION['userLogged']['rol'] == 'delivery_person') {
+            $userId = $_SESSION['userLogged']['id'];
+            $userOrders = $orderModel->getAllOrdersByUserId($userId);
+            $orderIds = array_map(function ($order) {
+                return $order['id'];
+            }, $userOrders);
+            if (!in_array($orderId, $orderIds)) {
+                header('Location: /error/error404');
+                exit();
+            }
+        }
+
         $orderLinesModel = new OrderLines();
         $order = $orderModel->getById($orderId);
         $orderLines = $orderLinesModel->getOrderLinesByOrderId($orderId);

@@ -1,10 +1,7 @@
 <div class="container-fluid">
     <div class="container">
-        <!-- Title -->
-        <div class="d-flex justify-content-between align-items-center py-3">
-            <h2 class="h5 mb-0">Order #<?php echo htmlspecialchars($params['order']['id']); ?></h2>
-        </div>
-
+        <br>
+        <br>
         <!-- Main content -->
         <div class="row">
             <div class="col-lg-8">
@@ -13,9 +10,7 @@
                     <div class="card-body">
                         <div class="mb-3 d-flex justify-content-between">
                             <div>
-                                <span class="me-3">22-11-2021</span>
-                                <span class="me-3">#<?php echo htmlspecialchars($params['order']['id']); ?></span>
-                                <span class="me-3">Visa -1234</span>
+                                <span class="me-3">Order #<?php echo htmlspecialchars($params['order']['id']); ?></span>
                                 <?php
                                 // Assign color classes based on order state
                                 $state = $params['order']['state'];
@@ -47,14 +42,12 @@
                                 </span>
                                 <?php
                                 if (isset($params['message'])) {
-                                    echo "<p style='color:#F47F22'>" . $params['message'] . "</p>";
+                                    echo "<p class='badge rounded-pill' style='color:#F47F22'>" . $params['message'] . "</p>";
                                 }
                                 ?>
                             </div>
                             <div class="d-flex">
-                                <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text">
-                                    <i class="bi bi-download"></i> <span class="text">Invoice</span>
-                                </button>
+                                <span class="me-3">Order date: <?php echo htmlspecialchars($params['order']['orderDate']); ?></span>
                             </div>
                         </div>
                         <table class="table table-borderless">
@@ -77,11 +70,20 @@
                                             <td>
                                                 <div class="d-flex mb-2">
                                                     <div class="flex-shrink-0">
-                                                        <img src="<?php echo htmlspecialchars($bookDetails['coverPhoto']); ?>" alt="" width="35" class="img-fluid">
+                                                        <img src="<?php echo htmlspecialchars($bookDetails['coverPhoto']); ?>" alt="" width="42" class="img-fluid">
                                                     </div>
                                                     <div class="flex-lg-grow-1 ms-3">
-                                                        <h6 class="small mb-0"><a href="#" class="text-reset"><?php echo htmlspecialchars($bookDetails['title']); ?></a></h6>
-                                                        <span class="small">Color: Black</span>
+                                                        <div class="mb-1">
+                                                            <h6 class="small mb-0">
+                                                                <a href="#" class="text-reset"><?php echo htmlspecialchars($bookDetails['title']); ?></a>
+                                                            </h6>
+                                                        </div>
+                                                        <div class="mb-1">
+                                                            <span class="small">Author: <?php echo htmlspecialchars($bookDetails['author']); ?></span>
+                                                        </div>
+                                                        <div class="mb-0">
+                                                            <span class="small">Price: <?php echo htmlspecialchars($line['price']); ?></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -152,7 +154,7 @@
                     </div>
                 </div>
 
-                <?php if ($params['order']['state'] === 'Pending' || $params['order']['state'] === 'Validated' ): ?>
+                <?php if ($params['order']['state'] === 'Pending' || $params['order']['state'] === 'Validated'): ?>
                     <div class="card mb-3">
                         <a href="/order/cancel/<?php echo htmlspecialchars($params['order']['id']); ?>">
                             <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block" style="background-color: #F47F22; color: white;">
@@ -176,3 +178,4 @@
         </div>
     </div>
 </div>
+<br>

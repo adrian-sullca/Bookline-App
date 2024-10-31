@@ -42,14 +42,44 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($params['userOrders'] as $order) { ?>
+                <?php
+                use App\Models\OrderLines;
+                $orderLinesModel = new OrderLines();
+                foreach ($params['userOrders'] as $order) {
+                    switch ($order['state']) {
+                        case 'Canceled':
+                            $colorClass = 'text-danger';
+                            break;
+                        case 'Pending':
+                            $colorClass = 'text-warning';
+                            break;
+                        case 'Validated':
+                            $colorClass = 'text-info';
+                            break;
+                        case 'In Transit':
+                            $colorClass = 'text-secondary';
+                            break;
+                        case 'Delivered to the Customer':
+                            $colorClass = 'text-success';
+                            break;
+                        case 'Confirmed by Customer':
+                            $colorClass = 'text-primary';
+                            break;
+                    }
+
+                    $total = 0;
+                    $orderLines = $orderLinesModel->getOrderLinesByOrderId($order['id']);
+                    foreach ($orderLines as $line) {
+                        $total += $line['price'] * $line['quantity'];
+                    }
+                ?>
                     <tr>
                         <td><?php echo htmlspecialchars($order['id']); ?></td>
                         <td><?php echo $params['userLogged']['username'] ?></td>
                         <td><?php echo $params['userLogged']['address'] ?></td>
-                        <td>12</td>
-                        <td><span class="status text-success">&bull;</span> <?php echo htmlspecialchars($order['state']); ?></td>
-                        <td>100</td>
+                        <td><?php echo $order['orderDate'] ?></td>
+                        <td><span class="status <?php echo $colorClass; ?>">&bull;</span> <?php echo htmlspecialchars($order['state']); ?></td>
+                        <td><?php echo number_format($total, 2); ?> €</td>
                         <td>
                             <a href="/order/details/<?php echo htmlspecialchars($order['id']); ?>" title="View Details" data-toggle="tooltip">
                                 <img src="../../../Public/Assets/img/info-icon-orange.svg" alt="">

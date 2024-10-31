@@ -33,14 +33,6 @@
                     <p><?php echo $_SESSION['userLogged']['address'] ?></p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Created</label>
-                </div>
-                <div class="col-md-6">
-                    <p><?php echo $_SESSION['userLogged']['address'] ?></p>
-                </div>
-            </div>
         </div>
     </div>
     <div class="col-md-4">

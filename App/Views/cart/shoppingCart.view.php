@@ -30,10 +30,10 @@
                         ?>
                             <!-- Single item -->
                             <div class="row">
-                                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                <div class="col-lg-2 col-md-12 mb-4 mb-lg-0">
                                     <!-- Image -->
                                     <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                                        <img src="<?php echo $book['coverPhoto']; ?>" class="w-100" alt="<?php echo $book['title']; ?>" style="max-height: 280px; min-height: 280px" />
+                                        <img src="<?php echo $book['coverPhoto']; ?>" class="w-100" alt="<?php echo $book['title']; ?>" style="max-width: 110px; height: 100%; border-radius: 5px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);" />
                                         <a href="/book/details/<?php echo $book['id'] ?>">
                                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                         </a>
